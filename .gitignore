@@ -46,7 +46,7 @@ Web.Release.config
 **/tmp/
 
 # Publish dosyaları
-publish/
+#publish/
 #wwwroot/
 #!wwwroot/index.html
 
@@ -62,9 +62,9 @@ yarn-error.log
 pnpm-debug.log
 
 # Frontend build klasörleri (örnekler)
-dist/
-build/
-coverage/
+#dist/
+#build/
+#coverage/
 
 # Docker dosyaları (isteğe bağlı)
 docker-compose.override.yml
