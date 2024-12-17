@@ -47,8 +47,8 @@ Web.Release.config
 
 # Publish dosyaları
 publish/
-wwwroot/
-!wwwroot/index.html
+#wwwroot/
+#!wwwroot/index.html
 
 # IDE'ye özgü dosyalar
 .idea/
