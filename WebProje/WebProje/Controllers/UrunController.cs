@@ -2,7 +2,7 @@
 
 namespace WebProje.Controllers
 {
-	public class UrunlerController : Controller
+	public class UrunController : Controller
 	{
 		public IActionResult Index()
 		{
