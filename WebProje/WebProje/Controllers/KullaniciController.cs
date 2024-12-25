@@ -2,7 +2,7 @@
 
 namespace WebProje.Controllers
 {
-	public class KayitController : Controller
+	public class KullaniciController : Controller
 	{
 		public IActionResult Index()
 		{
