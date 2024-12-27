@@ -8,5 +8,18 @@ namespace WebProje.Controllers
 		{
 			return View();
 		}
+
+		public IActionResult KullaniciGiris()
+		{
+			return View();
+		}
+
+
+		public IActionResult KullaniciKayit() 
+		{
+			return View();
+		}
+
+		
 	}
 }
