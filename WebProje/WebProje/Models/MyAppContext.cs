@@ -12,8 +12,9 @@ namespace WebProje.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server = KONTEVS\\SQLEXPRESS; DataBase = WebProjeDB; Trusted_Connection = True; TrustServerCertificate = True");
-        }
+			optionsBuilder.UseSqlServer("Server=Caner\\SQLEXPRESS;Database=WebProjeDB;User Id=sa;Password=Caner12345;TrustServerCertificate=True;");
 
-    }
+		}
+
+	}
 }

@@ -12,8 +12,8 @@ using WebProje.Models;
 namespace WebProje.Migrations
 {
     [DbContext(typeof(MyAppContext))]
-    [Migration("20241227133458_KullaniciTel")]
-    partial class KullaniciTel
+    [Migration("20241228172041_AddTelNoToKullanici")]
+    partial class AddTelNoToKullanici
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,9 @@ namespace WebProje.Migrations
                     b.Property<string>("Soyad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("TelNo")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

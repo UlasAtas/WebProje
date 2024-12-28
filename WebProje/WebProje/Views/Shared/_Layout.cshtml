@@ -1,49 +1,65 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebProje</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebProje.styles.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - GKATELİERS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebProje</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav>
+            <div class="logo">GKATELİERS</div>
+            <div class="nav-links">
+                <a href="@Url.Action("Index", "Home")">Ana Sayfa</a>
+                <a href="@Url.Action("UrunListe", "Urun")">Mağaza</a>
+                <a href="@Url.Action("Index", "Hakkimizda")">Hakkımızda</a>
+                <a href="@Url.Action("KullaniciGiris", "Kullanici")">Giriş Yap</a>
+                
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - WebProje - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GKATELİERS</h3>
+                <p>Bebeğiniz için özel tasarımlar</p>
+            </div>
+            <div class="footer-section">
+                <h3>Kategoriler</h3>
+                <ul>
+                    <li><a href="@Url.Action("Category", "Product", new { id = 1 })">Yeni Doğan</a></li>
+                    <li><a href="@Url.Action("Category", "Product", new { id = 2 })">Bebek</a></li>
+                    <li><a href="@Url.Action("Category", "Product", new { id = 3 })">Küçük Çocuk</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kişiselleştirme</h3>
+                <ul>
+                    <li><a href="@Url.Action("HowItWorks", "Home")">Nasıl Çalışır?</a></li>
+                    <li><a href="@Url.Action("Examples", "Product")">Örnek Tasarımlar</a></li>
+                    <li><a href="@Url.Action("FAQ", "Home")">Sık Sorulan Sorular</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>İletişim</h3>
+                <ul>
+                    <li>Tel: (xxx) xxx xx xx</li>
+                    <li>Adres: xxxxxxxxxxxx </li>
+                    <li>E-posta: info@gkateliers.com</li>
+                </ul>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
