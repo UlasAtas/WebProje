@@ -69,3 +69,6 @@ pnpm-debug.log
 # Docker dosyaları (isteğe bağlı)
 docker-compose.override.yml
 docker-compose.debug.yml
+/WebProje/WebProje/Migrations
+/WebProje/WebProje/Migrations
+/WebProje/WebProje/Migrations

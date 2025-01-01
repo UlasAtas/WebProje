@@ -6,7 +6,13 @@ namespace WebProje.Controllers
 {
 	public class KullaniciController : Controller
 	{
-		MyAppContext context=new MyAppContext();
+		private readonly MyAppContext _context;
+
+		public KullaniciController(MyAppContext context)
+		{
+			_context = context;
+		}
+
 		public IActionResult Index()
 		{
 			
@@ -27,8 +33,8 @@ namespace WebProje.Controllers
 		[HttpPost]
 		public IActionResult KullaniciKayit(Kullanici kullanici) 
 		{
-			context.Kullanici.Add(kullanici);
-			context.SaveChanges();
+			_context.Kullanici.Add(kullanici);
+			_context.SaveChanges();
 			return RedirectToAction();
 		}
 
