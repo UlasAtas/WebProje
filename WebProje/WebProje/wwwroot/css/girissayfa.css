@@ -1,0 +1,81 @@
+﻿/* Genel stil ayarları */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Giriş formu için container */
+.giris-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Başlık stili */
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Form grup düzeni */
+.form-grup {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+    .form-grup label {
+        display: block;
+        color: #555;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .form-grup input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+/* Giriş butonu stili */
+.giris-btn {
+    background-color: #5c6bc0;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .giris-btn:hover {
+        background-color: #3f4c9e;
+    }
+
+/* Ekstra bağlantılar */
+.ekstra-linkler {
+    margin-top: 20px;
+}
+
+.link {
+    color: #5c6bc0;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+    .link:hover {
+        text-decoration: underline;
+    }
