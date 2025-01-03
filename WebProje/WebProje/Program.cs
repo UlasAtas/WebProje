@@ -2,6 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using WebProje.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+// Oturum hizmetini ekleyin
+builder.Services.AddDistributedMemoryCache(); // Oturum için gerekli
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Oturum süresi
+    options.Cookie.HttpOnly = true; // Güvenlik
+    options.Cookie.IsEssential = true; // GDPR uyumluluðu
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -11,6 +19,8 @@ builder.Services.AddDbContext<MyAppContext>(options =>
 
 
 var app = builder.Build();
+app.UseSession();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -11,6 +11,14 @@ namespace WebProje.Models
 		}
 
 		public DbSet<Kullanici> Kullanici {  get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Tablo adını açıkça belirtelim
+            modelBuilder.Entity<Kullanici>().ToTable("Kullanici");
+        }
         public DbSet<Siparis> Siparis {  get; set; }
         public DbSet<Urun> Urun {  get; set; }
        // public DbSet<Adres> Adres {  get; set; }

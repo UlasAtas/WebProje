@@ -1,4 +1,52 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Giriş Yap</h3>
+            </div>
+            <div class="card-body">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <li>@modelError.ErrorMessage</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                <form asp-action="KullaniciGiris" method="post">
+                    <div class="form-group mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="sifre">Şifre</label>
+                        <input type="password" class="form-control" id="sifre" name="sifre" required>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p>Hesabınız yok mu? <a asp-action="KullaniciKayit">Kayıt Ol</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8" />
@@ -11,6 +59,7 @@
 <body>
     @{
         ViewData["Title"] = "Kullanıcı Girişi";
+        Layout = "";
     }
 
     <div class="login-container">
@@ -23,9 +72,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Şifre</label>
+                    <label for="sifre">Şifre</label>
                     <div class="password-input">
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" id="sifre" name="sifre" required>
                         <span class="password-toggle" onclick="togglePassword()">
                             <i class="bi bi-eye"></i>
                         </span>
@@ -78,4 +127,4 @@
         }
     </script>
 </body>
-</html>
+</html> *@
