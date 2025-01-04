@@ -1,4 +1,4 @@
-﻿/* kullanicikayit.css */
+﻿
 body {
     margin: 0;
     padding: 0;
@@ -11,7 +11,7 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-    margin-top: 60px; /* Navbar için boşluk */
+    margin-top: 60px; 
 }
 
 .login-box {
@@ -23,7 +23,7 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Form grupları için stiller */
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -34,7 +34,7 @@ body {
         color: #333;
     }
 
-/* Password input container */
+
 .password-input {
     position: relative;
 }
@@ -48,7 +48,7 @@ body {
     color: #666;
 }
 
-/* Terms link stili */
+
 .terms-link {
     color: #4f46e5;
     text-decoration: none;
@@ -61,7 +61,7 @@ body {
         text-decoration: underline;
     }
 
-/* Giriş yap linki container */
+
 .links-container {
     text-align: center;
     margin-top: 1.5rem;
@@ -85,7 +85,7 @@ body {
         text-decoration: underline;
     }
 
-/* Form validation stilleri */
+
 .form-control:invalid:not(:placeholder-shown) {
     border-color: #dc3545;
 }
@@ -94,12 +94,12 @@ body {
     border-color: #198754;
 }
 
-/* Telefon input özelleştirmesi */
+
 input[type="tel"] {
     letter-spacing: 0.5px;
 }
 
-/* Social login bölümü */
+
 .social-login {
     margin-top: 2rem;
     padding-top: 1.5rem;
@@ -125,7 +125,7 @@ input[type="tel"] {
         gap: 0.5rem;
     }
 
-/* Responsive düzenlemeler */
+
 @media (max-width: 576px) {
     .login-box {
         padding: 20px;

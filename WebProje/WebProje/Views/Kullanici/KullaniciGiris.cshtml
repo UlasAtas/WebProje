@@ -1,115 +1,56 @@
 ﻿@{
-    ViewData["Title"] = "Giriş Yap";
+    ViewData["Title"] = "Kullanıcı Girişi";
+    Layout = "_Layout";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="text-center">Giriş Yap</h3>
+<div class="login-container">
+    <div class="login-box">
+        <h2 class="text-center">Hoş Geldiniz</h2>
+        <form method="post" action="@Url.Action("KullaniciGiris", "Kullanici")">
+            <div class="form-group">
+                <label for="email">E-posta</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="ornek@email.com" required>
             </div>
-            <div class="card-body">
-                @if (!ViewData.ModelState.IsValid)
-                {
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                            {
-                                <li>@modelError.ErrorMessage</li>
-                            }
-                        </ul>
-                    </div>
-                }
 
-                <form asp-action="KullaniciGiris" method="post">
-                    <div class="form-group mb-3">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="sifre">Şifre</label>
-                        <input type="password" class="form-control" id="sifre" name="sifre" required>
-                    </div>
-
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary">Giriş Yap</button>
-                    </div>
-                </form>
-
-                <div class="text-center mt-3">
-                    <p>Hesabınız yok mu? <a asp-action="KullaniciKayit">Kayıt Ol</a></p>
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <div class="password-input">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                    <span class="password-toggle" onclick="togglePassword()">
+                        <i class="bi bi-eye"></i>
+                    </span>
                 </div>
+            </div>
+
+            <div class="form-check mb-4">
+                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                <label class="form-check-label" for="rememberMe">Beni Hatırla</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+
+            <div class="links-container">
+                <a href="#" class="forgot-password">Şifremi Unuttum</a>
+                <span class="divider">|</span>
+                <a href="KullaniciKayit" class="register">Hesap Oluştur</a>
+            </div>
+        </form>
+
+        <div class="social-login">
+            <p class="text-center">veya şununla devam edin</p>
+            <div class="social-buttons">
+                <button type="button" class="btn btn-outline-dark w-100 mb-2">
+                    <i class="bi bi-google"></i> Google ile Devam Et
+                </button>
+                <button type="button" class="btn btn-outline-dark w-100">
+                    <i class="bi bi-facebook"></i> Facebook ile Devam Et
+                </button>
             </div>
         </div>
     </div>
 </div>
 
-
-@* <!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GKATELIERS</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/girissayfa.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-</head>
-<body>
-    @{
-        ViewData["Title"] = "Kullanıcı Girişi";
-        Layout = "";
-    }
-
-    <div class="login-container">
-        <div class="login-box">
-            <h2 class="text-center mb-4">Kullanıcı Girişi</h2>
-            <form method="post" action="@Url.Action("KullaniciGiris", "Kullanici")">
-                <div class="form-group">
-                    <label for="email">E-posta</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="sifre">Şifre</label>
-                    <div class="password-input">
-                        <input type="password" class="form-control" id="sifre" name="sifre" required>
-                        <span class="password-toggle" onclick="togglePassword()">
-                            <i class="bi bi-eye"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                    <label class="form-check-label" for="rememberMe">Beni Hatırla</label>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
-
-                <div class="links-container">
-                    <a href="#" class="forgot-password">Şifremi Unuttum</a>
-                    <span class="divider">|</span>
-                    <a href="#" class="register">Kayıt Ol</a>
-                </div>
-            </form>
-
-            <div class="social-login">
-                <p class="text-center">veya şununla giriş yapın:</p>
-                <div class="social-buttons">
-                    <button class="btn btn-outline-dark w-100 mb-2">
-                        <i class="bi bi-google"></i> Google ile Giriş Yap
-                    </button>
-                    <button class="btn btn-outline-dark w-100">
-                        <i class="bi bi-facebook"></i> Facebook ile Giriş Yap
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+@section Scripts {
     <script>
         function togglePassword() {
             const passwordInput = document.getElementById('password');
@@ -126,5 +67,4 @@
             }
         }
     </script>
-</body>
-</html> *@
+}

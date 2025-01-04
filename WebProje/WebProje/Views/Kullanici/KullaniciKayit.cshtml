@@ -1,40 +1,105 @@
-﻿<html>
-<body>
+﻿@{
+    ViewData["Title"] = "Hesap Oluştur";
+    Layout = "_Layout";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/kullanicikayit.css" />
+}
 
 
-    <form method="post" asp-controller="Kullanici" asp-action="KullaniciKayit">
+<div class="login-container">
+    <div class="login-box">
+        <h2 class="text-center">Hesap Oluştur</h2>
+        <form method="post" action="@Url.Action("KullaniciKayit", "Kullanici")">
+            <div class="form-group">
+                <label for="firstName">Ad</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Adınız" required>
+            </div>
 
-        <div class="form-group">
-            <label for="Ad">Ad:</label>
-            <input type="text" class="form-control" id="Ad" name="Ad" required>
+            <div class="form-group">
+                <label for="lastName">Soyad</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Soyadınız" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-posta</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="ornek@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefon</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="(5XX) XXX XX XX" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <div class="password-input">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                    <span class="password-toggle" onclick="togglePassword('password')">
+                        <i class="bi bi-eye"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Şifre Tekrar</label>
+                <div class="password-input">
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required>
+                    <span class="password-toggle" onclick="togglePassword('confirmPassword')">
+                        <i class="bi bi-eye"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-check mb-4">
+                <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                <label class="form-check-label" for="terms">
+                    <a href="#" class="terms-link">Üyelik sözleşmesini</a> okudum ve kabul ediyorum
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Hesap Oluştur</button>
+
+            <div class="links-container mt-4">
+                <span>Zaten hesabınız var mı?</span>
+                <a href="@Url.Action("KullaniciGiris", "Kullanici")" class="login-link">Giriş Yap</a>
+            </div>
+        </form>
+
+        <div class="social-login">
+            <p class="text-center">veya şununla devam edin</p>
+            <div class="social-buttons">
+                <button type="button" class="btn btn-outline-dark w-100 mb-2">
+                    <i class="bi bi-google"></i> Google ile Devam Et
+                </button>
+                <button type="button" class="btn btn-outline-dark w-100">
+                    <i class="bi bi-facebook"></i> Facebook ile Devam Et
+                </button>
+            </div>
         </div>
-        
+    </div>
+</div>
 
-        <div class="form-group">
-            <label for="Soyad">Soyad:</label>
-            <input type="text" class="form-control" id="Soyad" name="Soyad" required>
-        </div>
-        
+@section Scripts {
+    <script>
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = passwordInput.nextElementSibling.querySelector('i');
 
-        <div class="form-group">
-            <label for="Email">Email:</label>
-            <input type="email" class="form-control" id="Email" name="Email" required>
-        </div>
-        
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        }
 
-        <div class="form-group">
-            <label for="Sifre">Sifre:</label>
-            <input type="password" class="form-control" id="Sifre" name="Sifre" required>
-        </div>
-        
-        <div class="form-group">
-         <label for="TelNo">Telefon No:</label>
-         <input type="tel" class="form-control" id="TelNo" name="TelNo" required>
-        </div> 
-
-        <button type="submit" class="btn btn-warning"> Kaydet </button>
-
-
-    </form>
-</body>
-</html>
+        document.getElementById('phone').addEventListener('input', function (e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? ' ' + x[3] : '') + (x[4] ? ' ' + x[4] : '');
+        });
+    </script>
+}
