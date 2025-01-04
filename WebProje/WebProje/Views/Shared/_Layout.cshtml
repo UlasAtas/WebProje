@@ -11,7 +11,6 @@
     @await RenderSectionAsync("Scripts", required: false)
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="/">GKATELIERS</a>
@@ -37,9 +36,33 @@
             </div>
         </div>
     </nav>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="loginToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Hoş Geldiniz</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                @TempData["WelcomeMessage"]
+            </div>
+        </div>
+    </div>
+
     <main class="container mt-4">
         @RenderBody()
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    @if (TempData["WelcomeMessage"] != null)
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var toast = new bootstrap.Toast(document.getElementById('loginToast'));
+                toast.show();
+            });
+        </script>
+    }
 </body>
 </html>

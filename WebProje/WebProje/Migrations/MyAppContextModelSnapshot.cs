@@ -22,21 +22,57 @@ namespace WebProje.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebProje.Models.Kullanici", b =>
+            modelBuilder.Entity("WebProje.Models.Adres", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AdresId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdresId"));
+
+                    b.Property<string>("AdresSatiri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Il")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ilce")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("KullaniciId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PostaKodu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdresId");
+
+                    b.HasIndex("KullaniciId");
+
+                    b.ToTable("Adres");
+                });
+
+            modelBuilder.Entity("WebProje.Models.Kullanici", b =>
+                {
+                    b.Property<int>("KullaniciId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KullaniciId"));
 
                     b.Property<string>("Ad")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Rol")
                         .IsRequired()
@@ -44,18 +80,26 @@ namespace WebProje.Migrations
 
                     b.Property<string>("Sifre")
                         .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("SifreTekrar")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Soyad")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<long>("TelNo")
-                        .HasColumnType("bigint");
+                    b.Property<string>("TelNo")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("Id");
+                    b.HasKey("KullaniciId");
 
-                    b.ToTable("Kullanici");
+                    b.ToTable("Kullanici", (string)null);
                 });
 
             modelBuilder.Entity("WebProje.Models.Siparis", b =>
@@ -87,42 +131,61 @@ namespace WebProje.Migrations
                     b.Property<decimal>("ToplamTutar")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("UrunId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("KullaniciId");
+
+                    b.HasIndex("UrunId");
 
                     b.ToTable("Siparis");
                 });
 
             modelBuilder.Entity("WebProje.Models.Urun", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UrunId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UrunId"));
 
                     b.Property<string>("Aciklama")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("Ad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("AktifMi")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ResimUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StokMiktari")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UrunAdi")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("UrunId");
 
                     b.ToTable("Urun");
+                });
+
+            modelBuilder.Entity("WebProje.Models.Adres", b =>
+                {
+                    b.HasOne("WebProje.Models.Kullanici", "Kullanici")
+                        .WithMany("Adresler")
+                        .HasForeignKey("KullaniciId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kullanici");
                 });
 
             modelBuilder.Entity("WebProje.Models.Siparis", b =>
@@ -132,9 +195,20 @@ namespace WebProje.Migrations
                         .HasForeignKey("KullaniciId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("WebProje.Models.Urun", null)
+                        .WithMany("Siparisler")
+                        .HasForeignKey("UrunId");
                 });
 
             modelBuilder.Entity("WebProje.Models.Kullanici", b =>
+                {
+                    b.Navigation("Adresler");
+
+                    b.Navigation("Siparisler");
+                });
+
+            modelBuilder.Entity("WebProje.Models.Urun", b =>
                 {
                     b.Navigation("Siparisler");
                 });

@@ -1,130 +1,109 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebProje.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebProje.Controllers
 {
-    public class KullaniciController : Controller
-    {
-        private readonly MyAppContext _context;
+	public class KullaniciController : Controller
+	{
+		private readonly MyAppContext context;
 
-        public KullaniciController(MyAppContext context)
-        {
-            _context = context;
-        }
+		public KullaniciController(MyAppContext context)
+		{
+			this.context = context;
+		}
 
-        
-        // GET: Kullanici/KullaniciGiris
-        public IActionResult KullaniciGiris()
-        {
-            // Eğer kullanıcı zaten giriş yapmışsa ana sayfaya yönlendir
-            //if (HttpContext.Session.GetString("Email") != null)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            return View();
-        }
-
-        // POST: Kullanici/KullaniciGiris
-        [HttpPost]
-        public IActionResult KullaniciGiris(string email, string sifre)
-        {
-            try
-            {
-                // Email ve şifre boş mu kontrol et
-                if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(sifre))
-                {
-                    ModelState.AddModelError("", "Email ve şifre alanları zorunludur.");
-                    return View();
-                }
-
-                // Veritabanında kullanıcıyı ara
-                var kullanici = _context.Kullanici
-                    .FirstOrDefault(k => k.Email == email && k.Sifre == sifre);
-
-                // Kullanıcı bulunamadıysa
-                if (kullanici == null)
-                {
-                    ModelState.AddModelError("", "Geçersiz email veya şifre!");
-                    return View();
-                }
-
-                // Session'a kullanıcı bilgilerini kaydet
-                HttpContext.Session.SetInt32("KullaniciId", kullanici.KullaniciId);
-                HttpContext.Session.SetString("Email", kullanici.Email);
-                HttpContext.Session.SetString("Ad", kullanici.Ad);
-                HttpContext.Session.SetString("Soyad", kullanici.Soyad);
-                
-
-                // Eğer admin ise admin paneline yönlendir
-                //if (kullanici.AdminMi)
-                //{
-                //    HttpContext.Session.SetString("AdminMi", "true");
-                //    return RedirectToAction("AdminPanel", "Admin");
-                //}
-
-                // Normal kullanıcı ise ana sayfaya yönlendir
-                return RedirectToAction("Index", "Home");
-            }
-            catch (Exception ex)
-            {
-                // Hata durumunda kullanıcıya bilgi ver
-                ModelState.AddModelError("", "Giriş işlemi sırasında bir hata oluştu: " + ex.Message);
-                return View();
-            }
-        }
-
-        // Çıkış işlemi için yeni bir action ekleyelim
-        public IActionResult Cikis()
-        {
-            // Tüm session'ları temizle
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
-        }
+	
+		[HttpGet]
+		public IActionResult KullaniciKayit()
+		{
+			return View();
+		}
 
 
-        //public IActionResult KullaniciGiris()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public IActionResult KullaniciGiris(string email, string sifre)
-        //{
-        //    var Kullanici = _context.Kullanici.FirstOrDefault(u => u.Email == email &&
-        //    u.Sifre == sifre);
-        //    if (Kullanici != null)
-        //    {
-        //        var claims = new List<Claim>
-        //        {
-        //         new Claim(ClaimTypes.Name, Kullanici.Email),
-        //         new Claim(ClaimTypes.Role, Kullanici.Rol)
-        //        };
-        //        var identity = new ClaimsIdentity(claims, "CookieAuth");
-        //        var principal = new ClaimsPrincipal(identity);
-        //        HttpContext.SignInAsync("CookieAuth", principal);
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> KullaniciKayit([Bind("Ad,Soyad,Email,Sifre,SifreTekrar,TelNo")] Kullanici kullanici)
+		{
+			if (ModelState.IsValid)
+			{
+				// Email kontrolü
+				var mevcutKullanici = await context.Kullanici
+					.FirstOrDefaultAsync(k => k.Email == kullanici.Email);
 
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    ViewBag.Error = "Kullanıcı adı veya parola hatalı.";
-        //    return View();
-        //}
+				if (mevcutKullanici != null)
+				{
+					ModelState.AddModelError("Email", "Bu email adresi zaten kayıtlı.");
+					return View(kullanici);
+				}
 
+				// Telefon numarası kontrolü
+				mevcutKullanici = await context.Kullanici
+					.FirstOrDefaultAsync(k => k.TelNo == kullanici.TelNo);
 
-        public IActionResult KullaniciKayit()
-        {
-            return View();
-        }
+				if (mevcutKullanici != null)
+				{
+					ModelState.AddModelError("TelNo", "Bu telefon numarası zaten kayıtlı.");
+					return View(kullanici);
+				}
 
-        [HttpPost]
-        public IActionResult KullaniciKayit(Kullanici kullanici)
-        {
-            _context.Kullanici.Add(kullanici);
-            _context.SaveChanges();
-            return RedirectToAction();
-        }
+				// Varsayılan rol ataması
+				kullanici.Rol = "Kullanici";
 
+				try
+				{
+					context.Add(kullanici);
+					await context.SaveChangesAsync();
 
-    }
+					TempData["Basarili"] = "Hesabınız başarıyla oluşturuldu. Lütfen giriş yapın.";
+					return RedirectToAction(nameof(KullaniciGiris));
+				}
+				catch (Exception hata)
+				{
+					ModelState.AddModelError("", "Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.");
+				}
+			}
+
+			return View(kullanici);
+		}
+
+		// Giriş içim
+		[HttpGet]
+		public IActionResult KullaniciGiris()
+		{
+			return View();
+		}
+
+		
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> KullaniciGiris(string email, string sifre)
+		{
+			if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(sifre))
+			{
+				ModelState.AddModelError("", "Lütfen e-posta ve şifre alanlarını doldurunuz.");
+				return View();
+			}
+			var kullanici = await context.Kullanici
+				.FirstOrDefaultAsync(k => k.Email == email && k.Sifre == sifre);
+			if (kullanici == null)
+			{
+				ModelState.AddModelError("", "Geçersiz email veya şifre.");
+				return View();
+			}
+			// Oturum bilgilerini kaydet
+			HttpContext.Session.SetString("KullaniciId", kullanici.KullaniciId.ToString());
+			HttpContext.Session.SetString("KullaniciRol", kullanici.Rol);
+			HttpContext.Session.SetString("KullaniciAdi", $"{kullanici.Ad} {kullanici.Soyad}");
+			TempData["WelcomeMessage"] = $"Hoş geldiniz, {kullanici.Ad}!";
+			return RedirectToAction("Index", "Home");
+		}
+		// Kullanıcı çıkış işlemi
+		public IActionResult OturumKapat()
+		{
+			HttpContext.Session.Clear();
+			return RedirectToAction("Index", "Home");
+		}
+	}
+
 }

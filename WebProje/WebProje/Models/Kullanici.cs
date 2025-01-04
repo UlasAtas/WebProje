@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebProje.Models
 {
@@ -22,15 +23,20 @@ namespace WebProje.Models
 
 		[Required(ErrorMessage = "Şifre alanı zorunludur.")]
 		[StringLength(100, MinimumLength = 8, ErrorMessage = "Şifre en az 8 karakter uzunluğunda olmalıdır.")]
-		public required string Sifre { get; set; } 
+		public required string Sifre { get; set; }
+	
+		[Required(ErrorMessage = "Şifre tekrar alanı zorunludur.")]
+		[Compare("Sifre", ErrorMessage = "Şifreler eşleşmiyor.")]
+		[Display(Name = "Şifre Tekrar")]
+		public string SifreTekrar { get; set; }
 
 		[Required]
-		public string Rol { get; set; } = "User"; // Admin veya Kullanici
+		public string Rol { get; set; } = "Kullanici"; 
 
 		[Required(ErrorMessage = "Telefon numarası zorunludur.")]
-		[Range(5000000000, 5999999999, ErrorMessage = "Geçerli bir telefon numarası giriniz (5xx xxx xx xx formatında).")]
-		[RegularExpression(@"^\d{11}$")]
-		public required long TelNo { get; set; }
+		[RegularExpression(@"^5\d{9}$", ErrorMessage = "Geçerli bir telefon numarası giriniz (5xx xxx xx xx formatında).")]
+		[StringLength(10)]
+		public required string TelNo { get; set; }
 
 		public virtual ICollection<Siparis>? Siparisler { get; set; }
 		public virtual ICollection<Adres>? Adresler { get; set; }

@@ -2,60 +2,48 @@
     ViewData["Title"] = "Kullanıcı Girişi";
     Layout = "_Layout";
 }
-
+@model Kullanici
 <div class="login-container">
     <div class="login-box">
         <h2 class="text-center">Hoş Geldiniz</h2>
-        <form method="post" action="@Url.Action("KullaniciGiris", "Kullanici")">
-            <div class="form-group">
-                <label for="email">E-posta</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="ornek@email.com" required>
-            </div>
+        <form asp-controller="Kullanici" asp-action="KullaniciGiris" method="post">
+           
 
             <div class="form-group">
-                <label for="password">Şifre</label>
+                <label asp-for="Email">E-posta</label>
+                <input asp-for="Email" class="form-control" placeholder="ornek@email.com">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sifre">Şifre</label>
                 <div class="password-input">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                    <input asp-for="Sifre" class="form-control" placeholder="••••••••">
                     <span class="password-toggle" onclick="togglePassword()">
                         <i class="bi bi-eye"></i>
                     </span>
                 </div>
+                <span asp-validation-for="Sifre" class="text-danger"></span>
             </div>
-
             <div class="form-check mb-4">
                 <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
                 <label class="form-check-label" for="rememberMe">Beni Hatırla</label>
             </div>
-
             <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
-
             <div class="links-container">
                 <a href="#" class="forgot-password">Şifremi Unuttum</a>
                 <span class="divider">|</span>
-                <a href="KullaniciKayit" class="register">Hesap Oluştur</a>
+                <a asp-controller="Kullanici" asp-action="KullaniciKayit" class="register">Hesap Oluştur</a>
             </div>
         </form>
-
-        <div class="social-login">
-            <p class="text-center">veya şununla devam edin</p>
-            <div class="social-buttons">
-                <button type="button" class="btn btn-outline-dark w-100 mb-2">
-                    <i class="bi bi-google"></i> Google ile Devam Et
-                </button>
-                <button type="button" class="btn btn-outline-dark w-100">
-                    <i class="bi bi-facebook"></i> Facebook ile Devam Et
-                </button>
-            </div>
-        </div>
     </div>
 </div>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     <script>
         function togglePassword() {
-            const passwordInput = document.getElementById('password');
+            const passwordInput = document.getElementById('Sifre');
             const icon = document.querySelector('.password-toggle i');
-
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 icon.classList.remove('bi-eye');
@@ -66,5 +54,16 @@
                 icon.classList.add('bi-eye');
             }
         }
+
+         document.querySelector('form').addEventListener('submit', function(e) {
+            const email = document.getElementById('Email').value;
+            const password = document.getElementById('Sifre').value;
+
+            if (!email || !password) {
+                e.preventDefault();
+                const validationDiv = document.querySelector('.validation-summary');
+                validationDiv.innerHTML = '<ul><li>Lütfen tüm alanları doldurunuz.</li></ul>';
+            }
+        });
     </script>
 }

@@ -5,50 +5,56 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/kullanicikayit.css" />
 }
-
+@model Kullanici
 
 <div class="login-container">
     <div class="login-box">
         <h2 class="text-center">Hesap Oluştur</h2>
-        <form method="post" action="@Url.Action("KullaniciKayit", "Kullanici")">
+        <form method="post" asp-controller="Kullanici" asp-action="KullaniciKayit">
             <div class="form-group">
-                <label for="firstName">Ad</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Adınız" required>
+                <label asp-for="Ad">Ad</label>
+                <input type="text" class="form-control" asp-for="Ad" placeholder="Adınız">
+                <span asp-validation-for="Ad" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label for="lastName">Soyad</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Soyadınız" required>
+                <label asp-for="Soyad">Soyad</label>
+                <input type="text" class="form-control" asp-for="Soyad" placeholder="Soyadınız">
+                <span asp-validation-for="Soyad" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label for="email">E-posta</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="ornek@email.com" required>
+                <label asp-for="Email">E-posta</label>
+                <input type="email" class="form-control" asp-for="Email" placeholder="ornek@email.com">
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label for="phone">Telefon</label>
-                <input type="tel" class="form-control" id="phone" name="phone" placeholder="(5XX) XXX XX XX" required>
+                <label asp-for="TelNo">Telefon</label>
+                <input type="tel" class="form-control" asp-for="TelNo" id="phone" placeholder="5XXXXXXXXX">
+                <span asp-validation-for="TelNo" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label for="password">Şifre</label>
+                <label asp-for="Sifre">Şifre</label>
                 <div class="password-input">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
-                    <span class="password-toggle" onclick="togglePassword('password')">
+                    <input type="password" class="form-control" asp-for="Sifre" placeholder="••••••••">
+                    <span class="password-toggle" onclick="togglePassword('Sifre')">
                         <i class="bi bi-eye"></i>
                     </span>
                 </div>
+                <span asp-validation-for="Sifre" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label for="confirmPassword">Şifre Tekrar</label>
+                <label asp-for="SifreTekrar">Şifre Tekrar</label>
                 <div class="password-input">
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required>
-                    <span class="password-toggle" onclick="togglePassword('confirmPassword')">
+                    <input type="password" class="form-control" asp-for="SifreTekrar" placeholder="••••••••">
+                    <span class="password-toggle" onclick="togglePassword('SifreTekrar')">
                         <i class="bi bi-eye"></i>
                     </span>
                 </div>
+                <span asp-validation-for="SifreTekrar" class="text-danger"></span>
             </div>
 
             <div class="form-check mb-4">
@@ -62,7 +68,7 @@
 
             <div class="links-container mt-4">
                 <span>Zaten hesabınız var mı?</span>
-                <a href="@Url.Action("KullaniciGiris", "Kullanici")" class="login-link">Giriş Yap</a>
+                <a asp-controller="Kullanici" asp-action="KullaniciGiris" class="login-link">Giriş Yap</a>
             </div>
         </form>
 
@@ -81,6 +87,8 @@
 </div>
 
 @section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script>
         function togglePassword(inputId) {
             const passwordInput = document.getElementById(inputId);
@@ -98,8 +106,13 @@
         }
 
         document.getElementById('phone').addEventListener('input', function (e) {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? ' ' + x[3] : '') + (x[4] ? ' ' + x[4] : '');
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.slice(0, 10);
+            if (value.length === 10 && value[0] === '5') {
+                e.target.value = value;
+            } else {
+                e.target.value = value.replace(/[^5]/, '5');
+            }
         });
     </script>
 }
