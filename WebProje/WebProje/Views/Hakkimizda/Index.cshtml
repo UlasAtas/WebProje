@@ -1,5 +1,122 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Hakkımızda - GKATELIERS";
+    Layout = "_Layout";
 }
+@section Styles {
+        <link rel="stylesheet" href="~/css/hakkimizda.css" />
+}
+
+<div class="about-container">
+    <section class="about-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="about-title">GKATELIERS</h1>
+                    <p class="about-subtitle">Kalite ve Şıklığın Buluşma Noktası</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="~/images/logo.png" alt="GKATELIERS" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-story">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">Hikayemiz</h2>
+                    <div class="story-content">
+                        <p>2020 yılında, moda ve tasarım tutkusuyla yola çıkan GKATELIERS, kurulduğu günden bu yana müşterilerine benzersiz ve kaliteli ürünler sunmaya devam ediyor. Her bir parçamız, özgün tasarım anlayışımız ve kalite standartlarımızla özenle hazırlanmaktadır.</p>
+                        <p>Tasarımlarımızda modern çizgiler ile klasik detayları harmanlayarak, zamansız parçalar ortaya çıkarıyoruz. Koleksiyonlarımız, günün her anında şıklığı yakalamak isteyen müşterilerimiz için özenle seçilmiş kumaşlar ve dikkatli işçilikle hazırlanmaktadır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-values">
+        <div class="container">
+            <h2 class="section-title">Değerlerimiz</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <i class="bi bi-star-fill"></i>
+                        <h3>Kalite</h3>
+                        <p>En iyi malzemeler ve işçilik standardıyla üretim yapıyoruz.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <i class="bi bi-heart-fill"></i>
+                        <h3>Müşteri Memnuniyeti</h3>
+                        <p>Müşterilerimizin memnuniyeti bizim önceliğimizdir.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <i class="bi bi-lightning-fill"></i>
+                        <h3>Yenilikçilik</h3>
+                        <p>Sürekli kendimizi yeniliyor ve trendleri takip ediyoruz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-team">
+        <div class="container">
+            <h2 class="section-title">Ekibimiz</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="/images/staff.png" alt="Takım Üyesi" class="team-image">
+                        <h3>Ahmet Yılmaz</h3>
+                        <p>Kurucu & CEO</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="/images/staff.png" alt="Takım Üyesi" class="team-image">
+                        <h3>Ayşe Demir</h3>
+                        <p>Baş Tasarımcı</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="/images/staff.png" alt="Takım Üyesi" class="team-image">
+                        <h3>Mehmet Kaya</h3>
+                        <p>Üretim Müdürü</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-contact">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Bize Ulaşın</h2>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <p>Merkez Mah. Tasarım Cad. No:123 Şişli/İstanbul</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="bi bi-telephone-fill"></i>
+                            <p>+90 (212) 555 00 00</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="bi bi-envelope-fill"></i>
+                            <p>info@gkateliers.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="/api/placeholder/600/400" alt="Mağaza" class="contact-image">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

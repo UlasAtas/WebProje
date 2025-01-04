@@ -15,11 +15,7 @@ namespace WebProje.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-
-            return View();
-        }
+        
         // GET: Kullanici/KullaniciGiris
         public IActionResult KullaniciGiris()
         {
@@ -87,6 +83,8 @@ namespace WebProje.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
+
+
         //public IActionResult KullaniciGiris()
         //{
         //    return View();

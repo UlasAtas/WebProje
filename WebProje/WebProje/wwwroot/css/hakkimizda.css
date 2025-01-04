@@ -1,0 +1,201 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.about-container {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.about-hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 100px 0;
+}
+
+.about-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+.about-subtitle {
+    font-size: 1.5rem;
+    color: #4f46e5;
+    font-weight: 500;
+}
+
+.hero-image {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.about-story {
+    background-color: #fff;
+}
+
+.story-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+    .story-content p {
+        margin-bottom: 20px;
+    }
+
+.about-values {
+    background-color: #f8f9fa;
+}
+
+.value-card {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+    .value-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .value-card i {
+        font-size: 2.5rem;
+        color: #4f46e5;
+        margin-bottom: 20px;
+    }
+
+    .value-card h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .value-card p {
+        color: #666;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+.about-team {
+    background-color: #fff;
+}
+
+.team-card {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.team-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.team-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.team-card p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.about-contact {
+    background-color: #f8f9fa;
+}
+
+.contact-info {
+    margin-top: 30px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .info-item i {
+        font-size: 1.5rem;
+        color: #4f46e5;
+        margin-right: 15px;
+    }
+
+    .info-item p {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+.contact-image {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 992px) {
+    .about-title {
+        font-size: 2.8rem;
+    }
+
+    .about-subtitle {
+        font-size: 1.3rem;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-title {
+        font-size: 2.4rem;
+        text-align: center;
+    }
+
+    .about-subtitle {
+        text-align: center;
+    }
+
+    .hero-image {
+        margin-top: 40px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .value-card {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-title {
+        font-size: 2rem;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+}
