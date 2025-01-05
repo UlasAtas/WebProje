@@ -1,5 +1,92 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewData["Title"]</title>
+	<link rel="stylesheet" href="~/css/urundetay.css">
+</head>
+
+<body>
+   <div class="container">
+        <div class="product-container">
+            <div class="product-images">
+                <div class="main-image">
+                    <img src="https://via.placeholder.com/500x500/ff5733/ffffff" alt="Ürün Görseli 1" class="active">
+                    <img src="https://via.placeholder.com/500x500/33ff57/ffffff" alt="Ürün Görseli 2">
+                    <img src="https://via.placeholder.com/500x500/3357ff/ffffff" alt="Ürün Görseli 3">
+                    <img src="https://via.placeholder.com/500x500/ff33f5/ffffff" alt="Ürün Görseli 4">
+                    <div class="slider-buttons">
+                        <button class="slider-button" onclick="prevSlide()">❮</button>
+                        <button class="slider-button" onclick="nextSlide()">❯</button>
+                    </div>
+                </div>
+                <div class="thumbnail-container">
+                    <img src="https://via.placeholder.com/500x500/ff5733/ffffff" alt="Küçük Görsel 1" class="thumbnail active" onclick="showSlide(0)">
+                    <img src="https://via.placeholder.com/500x500/33ff57/ffffff" alt="Küçük Görsel 2" class="thumbnail" onclick="showSlide(1)">
+                    <img src="https://via.placeholder.com/500x500/3357ff/ffffff" alt="Küçük Görsel 3" class="thumbnail" onclick="showSlide(2)">
+                    <img src="https://via.placeholder.com/500x500/ff33f5/ffffff" alt="Küçük Görsel 4" class="thumbnail" onclick="showSlide(3)">
+                </div>
+            </div>
+            <div class="product-details">
+                <h1 class="product-title">Ürün Adı</h1>
+                <div class="product-price">1.299,99 ₺</div>
+                <div class="product-actions">
+                    <div class="quantity-selector">
+                        <label class="quantity-label">Adet</label>
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary">Satın Al</button>
+                    <button class="btn btn-secondary">Sepete Ekle</button>
+                </div>
+                <div class="product-description">
+                    <h2 class="description-title">Ürün Açıklaması</h2>
+                    <div class="description-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.main-image img');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        function showSlide(index) {
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+
+            slides[currentSlide].classList.remove('active');
+            thumbnails[currentSlide].classList.remove('active');
+
+            currentSlide = index;
+
+            slides[currentSlide].classList.add('active');
+            thumbnails[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Otomatik slider başlatma (isteğe bağlı)
+        // setInterval(nextSlide, 5000);
+    </script>
+</body>
