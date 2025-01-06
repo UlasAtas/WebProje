@@ -13,7 +13,7 @@ namespace WebProje.Controllers
 			this.context = context;
 		}
 
-	
+
 		[HttpGet]
 		public IActionResult KullaniciKayit()
 		{
@@ -27,7 +27,7 @@ namespace WebProje.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				// Email kontrolü
+
 				var mevcutKullanici = await context.Kullanici
 					.FirstOrDefaultAsync(k => k.Email == kullanici.Email);
 
@@ -37,7 +37,7 @@ namespace WebProje.Controllers
 					return View(kullanici);
 				}
 
-				// Telefon numarası kontrolü
+
 				mevcutKullanici = await context.Kullanici
 					.FirstOrDefaultAsync(k => k.TelNo == kullanici.TelNo);
 
@@ -47,7 +47,7 @@ namespace WebProje.Controllers
 					return View(kullanici);
 				}
 
-				// Varsayılan rol ataması
+
 				kullanici.Rol = "Kullanici";
 
 				try
@@ -67,14 +67,14 @@ namespace WebProje.Controllers
 			return View(kullanici);
 		}
 
-		// Giriş içim
+
 		[HttpGet]
 		public IActionResult KullaniciGiris()
 		{
 			return View();
 		}
 
-		
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> KullaniciGiris(string email, string sifre)
@@ -91,19 +91,162 @@ namespace WebProje.Controllers
 				ModelState.AddModelError("", "Geçersiz email veya şifre.");
 				return View();
 			}
-			// Oturum bilgilerini kaydet
+
 			HttpContext.Session.SetString("KullaniciId", kullanici.KullaniciId.ToString());
 			HttpContext.Session.SetString("KullaniciRol", kullanici.Rol);
 			HttpContext.Session.SetString("KullaniciAdi", $"{kullanici.Ad} {kullanici.Soyad}");
-			TempData["WelcomeMessage"] = $"Hoş geldiniz, {kullanici.Ad}!";
+			TempData["Mesaj"] = $"Hoş geldiniz, {kullanici.Ad}!";
 			return RedirectToAction("Index", "Home");
 		}
-		// Kullanıcı çıkış işlemi
+
 		public IActionResult OturumKapat()
 		{
 			HttpContext.Session.Clear();
+			TempData["Mesaj"] = "Başarıyla çıkış yaptınız.";
 			return RedirectToAction("Index", "Home");
+		}
+
+
+		//aAYARLAR
+		
+		public async Task<IActionResult> Ayarlar()
+		{
+			if (!HttpContext.Session.TryGetValue("KullaniciId", out byte[] kullaniciIdBytes))
+			{
+				return RedirectToAction("KullaniciGiris");
+			}
+
+			int kullaniciId = int.Parse(System.Text.Encoding.UTF8.GetString(kullaniciIdBytes));
+
+
+			var kullanici = await context.Kullanici
+				.Include(k => k.Adres)  
+				.FirstOrDefaultAsync(k => k.KullaniciId == kullaniciId);
+
+			if (kullanici == null)
+			{
+				return RedirectToAction("KullaniciGiris");
+			}
+
+			return View(kullanici);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Ayarlar(Kullanici model)
+		{
+			try
+			{
+				var kullanici = await context.Kullanici
+					.Include(k => k.Adres)
+					.FirstOrDefaultAsync(k => k.KullaniciId == model.KullaniciId);
+
+				if (kullanici == null)
+				{
+					TempData["Hata"] = "Kullanıcı bulunamadı.";
+					return View(model);
+				}
+
+				if (string.IsNullOrEmpty(model.Ad) || string.IsNullOrEmpty(model.Soyad) ||
+					string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.TelNo))
+				{
+					TempData["Hata"] = "Lütfen tüm alanları doldurun.";
+					return View(model);
+				}
+
+				kullanici.Ad = model.Ad;
+				kullanici.Soyad = model.Soyad;
+				kullanici.Email = model.Email;
+				kullanici.TelNo = model.TelNo;
+
+				context.Update(kullanici); 
+
+
+				if (model.Adres != null)
+				{
+					if (kullanici.Adres == null)
+					{
+						var yeniAdres = new Adres
+						{
+							KullaniciId = kullanici.KullaniciId,
+							AdresSatiri = model.Adres.AdresSatiri,
+							Il = model.Adres.Il,
+							Ilce = model.Adres.Ilce,
+							PostaKodu = model.Adres.PostaKodu
+						};
+						context.Adres.Add(yeniAdres); 
+					}
+					else
+					{
+						kullanici.Adres.AdresSatiri = model.Adres.AdresSatiri;
+						kullanici.Adres.Il = model.Adres.Il;
+						kullanici.Adres.Ilce = model.Adres.Ilce;
+						kullanici.Adres.PostaKodu = model.Adres.PostaKodu;
+						context.Update(kullanici.Adres);
+					}
+				}
+
+				await context.SaveChangesAsync();
+				TempData["Mesaj"] = "Bilgileriniz başarıyla güncellendi.";
+				return RedirectToAction(nameof(Ayarlar));
+			}
+			catch (Exception ex)
+			{
+				TempData["Hata"] = "Güncelleme sırasında bir hata oluştu: " + ex.Message;
+				return View(model);
+			}
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> AdresGuncelle(Adres adres)
+		{
+			try
+			{
+				var kullanici = await context.Kullanici
+					.Include(k => k.Adres)
+					.FirstOrDefaultAsync(k => k.KullaniciId == adres.KullaniciId);
+
+				if (kullanici == null)
+				{
+					TempData["Hata"] = "Kullanıcı bulunamadı.";
+					return RedirectToAction(nameof(Ayarlar));
+				}
+
+				if (kullanici.Adres == null)
+				{
+					var yeniAdres = new Adres
+					{
+						KullaniciId = kullanici.KullaniciId,
+						AdresSatiri = adres.AdresSatiri,
+						Il = adres.Il,
+						Ilce = adres.Ilce,
+						PostaKodu = adres.PostaKodu
+					};
+					context.Adres.Add(yeniAdres);
+				}
+				else
+				{			
+					kullanici.Adres.AdresSatiri = adres.AdresSatiri;
+					kullanici.Adres.Il = adres.Il;
+					kullanici.Adres.Ilce = adres.Ilce;
+					kullanici.Adres.PostaKodu = adres.PostaKodu;
+					context.Update(kullanici.Adres);
+				}
+
+				await context.SaveChangesAsync();
+				TempData["Mesaj"] = "Adres bilgileri başarıyla güncellendi.";
+				return RedirectToAction(nameof(Ayarlar));
+			}
+			catch (Exception ex)
+			{
+				TempData["Hata"] = "Adres güncellenirken bir hata oluştu: " + ex.Message;
+				return RedirectToAction(nameof(Ayarlar));
+			}
 		}
 	}
 
 }
+
+
+

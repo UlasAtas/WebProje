@@ -21,6 +21,7 @@ namespace WebProje.Models
         }
         public DbSet<Siparis> Siparis {  get; set; }
         public DbSet<Urun> Urun {  get; set; }
+        public DbSet<Adres> Adres { get; set; }
        // public DbSet<Adres> Adres {  get; set; }
 
 	}

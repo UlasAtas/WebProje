@@ -1,0 +1,141 @@
+﻿@model WebProje.Models.Kullanici
+@{
+    ViewData["Title"] = "Hesap Ayarları";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <!-- Sol Menü -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center mb-4">
+                        <div class="bg-primary text-white rounded-circle p-3 mb-2">
+                            <i class="bi bi-person-circle fs-2"></i>
+                        </div>
+                        <h5 class="mb-0">@Model.Ad @Model.Soyad</h5>
+                        <small class="text-muted">@Model.Email</small>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item active">
+                            <i class="bi bi-gear me-2"></i> Hesap Ayarları
+                        </li>
+                        <li class="list-group-item">
+                            <a href="@Url.Action("Siparislerim", "Siparis")" class="text-decoration-none text-dark">
+                                <i class="bi bi-box me-2"></i> Siparişlerim
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none text-dark">
+                                <i class="bi bi-heart me-2"></i> Favorilerim
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ İçerik -->
+        <div class="col-md-9">
+            <!-- Hesap Bilgileri Kartı -->
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Hesap Bilgilerini Güncelle</h5>
+                </div>
+                <div class="card-body">
+                    @if (TempData["Mesaj"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["Mesaj"]
+                        </div>
+                    }
+                    @if (TempData["Hata"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["Hata"]
+                        </div>
+                    }
+
+                    <form asp-controller="Kullanici" asp-action="Ayarlar" method="post">
+                        <input type="hidden" asp-for="KullaniciId" />
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Ad" class="form-label">Ad</label>
+                                <input asp-for="Ad" class="form-control" />
+                                <span asp-validation-for="Ad" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Soyad" class="form-label">Soyad</label>
+                                <input asp-for="Soyad" class="form-control" />
+                                <span asp-validation-for="Soyad" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">E-posta</label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="TelNo" class="form-label">Telefon Numarası</label>
+                            <input asp-for="TelNo" class="form-control" />
+                            <span asp-validation-for="TelNo" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-lg me-2"></i>Değişiklikleri Kaydet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Adres Bilgileri Kartı -->
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Adres Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Kullanici" asp-action="AdresGuncelle" method="post">
+                        <input type="hidden" name="KullaniciId" value="@Model.KullaniciId" />
+
+                        <div class="mb-3">
+                            <label for="AdresSatiri" class="form-label">Adres</label>
+                            <textarea name="AdresSatiri" class="form-control" rows="3">@(Model.Adres?.AdresSatiri)</textarea>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="Il" class="form-label">İl</label>
+                                <input type="text" name="Il" class="form-control" value="@(Model.Adres?.Il)" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Ilce" class="form-label">İlçe</label>
+                                <input type="text" name="Ilce" class="form-control" value="@(Model.Adres?.Ilce)" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="PostaKodu" class="form-label">Posta Kodu</label>
+                            <input type="text" name="PostaKodu" class="form-control" value="@(Model.Adres?.PostaKodu)" />
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-lg me-2"></i>Adres Bilgilerini Güncelle
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
