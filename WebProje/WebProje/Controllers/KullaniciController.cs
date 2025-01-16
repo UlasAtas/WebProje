@@ -62,7 +62,9 @@ namespace WebProje.Controllers
 				{
 					ModelState.AddModelError("", "Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.");
 				}
-			}
+                // İlk kullanıcıyı admin yapmak için:
+                kullanici.Rol = (await context.Kullanici.CountAsync() == 0) ? "Admin" : "Kullanici";
+            }
 
 			return View(kullanici);
 		}
@@ -245,6 +247,7 @@ namespace WebProje.Controllers
 			}
 		}
 	}
+
 
 }
 

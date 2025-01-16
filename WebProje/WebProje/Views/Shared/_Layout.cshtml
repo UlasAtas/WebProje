@@ -93,5 +93,11 @@
             });
         </script>
     }
+    @if (Context.Session.GetString("KullaniciRol") == "Admin")
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+        </li>
+    }
 </body>
 </html>
