@@ -12,23 +12,45 @@ namespace WebProje.Controllers
         {
             _context = context;
         }
-        public IActionResult UrunDetay()
+
+
+		public async Task<IActionResult> UrunListe()
 		{
-			return View();
+			var urun = await _context.Urun
+				.Where(p => p.AktifMi)
+				//.OrderByDescending(p => p.CreatedDate)
+				.ToListAsync();
+
+			return View(urun);
 		}
 
-		public IActionResult UrunListe()
-        {
-            
 
-            var urunler = _context.Urun;
-            //.Where(u => u.AktifMi)
-            //.OrderByDescending(u => u.OlusturmaTarihi).ToList();
+		[HttpPost]
+		public async Task<IActionResult> BuyNow(int id)
+		{
+			var urun = await _context.Urun.FindAsync(id);
+			if (urun == null)
+			{
+				return NotFound();
+			}
 
-            return View(urunler);
-        }
-        
-        
+			
+			return RedirectToAction("Checkout", "Order", new { productId = id });
+		}
 
-    }
+		public async Task<IActionResult> UrunDetay(int id)
+		{
+			var urun = await _context.Urun
+				.FirstOrDefaultAsync(u => u.UrunId == id && u.AktifMi);
+
+			if (urun == null)
+			{
+				return NotFound();
+			}
+
+			return View(urun);
+		}
+	}
+
 }
+

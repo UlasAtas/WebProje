@@ -1,51 +1,46 @@
 ﻿@model IEnumerable<Urun>
+
 @{
     ViewData["Title"] = "Ürünler";
 }
 
-<div class="container">
-    <h2 class="mb-4">Ürünlerimiz</h2>
+@section Styles {
+           <link rel="stylesheet" href="~/css/urunliste.css" />       
+}
 
-    <div class="row">
-        @foreach (var urun in Model)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    @if (!string.IsNullOrEmpty(urun.ResimUrl))
-                    {
-                        <img src="@urun.ResimUrl" class="card-img-top" alt="@urun.UrunAdi" style="height: 200px; object-fit: cover;">
-                    }
-                    else
-                    {
-                        <img src="/images/lidya-tulum-takim.jpg" class="card-img-top" alt="Varsayılan ürün resmi" style="height: 200px; object-fit: cover;">
-                    }
-                    <div class="card-body">
-                        <h5 class="card-title">@urun.UrunAdi</h5>
-                        @* <p class="card-text">@(urun.Aciklama?.Length > 100 ? urun.Aciklama.Substring(0, 97) + "..." : urun.Aciklama)</p> *@
-                        <h6 class="card-subtitle mb-2 text-muted">@urun.Fiyat.ToString("C")</h6>
-                    </div>
-                    <div class="card-footer bg-white border-top-0">
-                        <a asp-action="UrunDetay" asp-route-id="@urun.UrunId" class="btn btn-primary">Detaylar</a>
-                        @if (urun.StokMiktari > 0)
-                        {
-                            <button class="btn btn-success" onclick="sepeteEkle(@urun.UrunId)">Sepete Ekle</button>
-                        }
-                        else
-                        {
-                            <button class="btn btn-secondary" disabled>Stokta Yok</button>
-                        }
-                    </div>
-                </div>
+<div class="products-container">
+    @foreach (var urun in Model)
+    {
+            <div class="product-card">
+                <img src="@urun.ResimUrl" alt="@urun.UrunAdi" class="product-image">
+                <h3 class="product-title">@urun.UrunAdi</h3>
+                <div class="product-price">@urun.Fiyat.ToString("N2") TL</div>
+
+                <a href="@Url.Action("UrunDetay", new { id = urun.UrunId })" class="button details-btn">
+                    Detaylar
+                </a>
+                      
+                                  
+                           <form asp-controller="Sepet" asp-action="AddToCart" method="post">
+                               <input type="hidden" name="productId" value="@urun.UrunId" />
+                               <button type="submit" class="button cart-btn">Sepete Ekle</button>
+                           </form>
+         
+                           <form asp-action="BuyNow" method="post">
+                               <input type="hidden" name="id" value="@urun.UrunId" />
+                               <button type="submit" class="button buy-btn">Satın Al</button>
+                           </form>
+
+                      
             </div>
-        }
-    </div>
+    }
 </div>
 
-@* @section Scripts {
-    <script>
-        function sepeteEkle(UrunId) {
-            // Sepete ekleme işlemi için AJAX çağrısı yapılacak
-            alert('Sepete ekleme özelliği yakında eklenecek!');
-        }
-    </script> 
-}*@
+<div class="container">
+    @if (TempData["UyariMesaji"] != null)
+    {
+            <div class="alert alert-warning" role="alert">
+            @TempData["UyariMesaji"]
+            </div>
+    }
+
