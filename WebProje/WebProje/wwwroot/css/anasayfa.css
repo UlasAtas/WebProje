@@ -1,5 +1,4 @@
 ﻿.hero {
-    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/anasayfa.jpg');
     height: 500px;
     display: flex;
     align-items: center;
@@ -7,7 +6,14 @@
     text-align: center;
     background-size: cover;
     background-position: center;
-    background-color: var(--accent-color);
+}
+
+body {
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 .hero-content {
@@ -15,22 +21,22 @@
     padding: 2rem;
 }
 
-    .hero-content h1 {
-        font-size: 2.8rem;
-        margin-bottom: 1rem;
-        color: var(--text-color);
-    }
+.hero-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
 
-    .hero-content p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        color: var(--text-color);
-    }
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
 
 .cta-button {
     padding: 1rem 2rem;
-    background-color: #007bff;
-    color: white;
+    background-color: rgba(220,219,214,255);
+    color: #4a4a4a;
     text-decoration: none;
     border-radius: 25px;
     font-weight: bold;
@@ -39,7 +45,7 @@
 }
 
     .cta-button:hover {
-        background-color: #ff7eb8;
+        background-color: rgb(200, 198, 190);
     }
 
 /* Customization Section */
@@ -72,14 +78,14 @@
 
     .step-card i {
         font-size: 2.5rem;
-        color: var(--primary-color);
+        color: rgb(183, 176, 156);
         margin-bottom: 1rem;
     }
 
 /* Categories Section */
 .categories {
     padding: 4rem 2rem;
-    background-color: var(--secondary-color);
+    background-color: rgb(245, 243, 237);
 }
 
     .categories h2 {

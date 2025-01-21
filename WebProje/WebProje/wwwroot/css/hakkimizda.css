@@ -9,7 +9,13 @@
 section {
     padding: 80px 0;
 }
-
+body {
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
 .section-title {
     font-size: 2.2rem;
     font-weight: 600;
@@ -199,3 +205,4 @@ section {
         padding: 40px 0;
     }
 }
+
