@@ -1,92 +1,47 @@
 ﻿@{
-    ViewData["Title"] = "Hakkımızda - GKATELIERS";
-    Layout = "_Layout";
+    ViewData["Title"] = "Hakkımızda";
 }
+
 @section Styles {
-        <link rel="stylesheet" href="~/css/hakkimizda.css" />
+    <link rel="stylesheet" href="~/css/hakkimizda.css" />
 }
 
 <div class="about-container">
-    <section class="about-hero">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="about-title">GKATELIERS</h1>
-                    <p class="about-subtitle">Kalite ve Şıklığın Buluşma Noktası</p>
-                </div>
-                <div class="col-lg-6">
-                    <img src="~/images/logo.png" alt="GKATELIERS" class="hero-image">
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="hero-image">
+        <img src="~/images/bebekgorsel.jpeg" alt="GKATELIERS Bebek Giyim" class="w-100">
+    </div>
 
-    <section class="about-story">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="section-title">Hikayemiz</h2>
-                    <div class="story-content">
-                        <p>2020 yılında, moda ve tasarım tutkusuyla yola çıkan GKATELIERS, kurulduğu günden bu yana müşterilerine benzersiz ve kaliteli ürünler sunmaya devam ediyor. Her bir parçamız, özgün tasarım anlayışımız ve kalite standartlarımızla özenle hazırlanmaktadır.</p>
-                        <p>Tasarımlarımızda modern çizgiler ile klasik detayları harmanlayarak, zamansız parçalar ortaya çıkarıyoruz. Koleksiyonlarımız, günün her anında şıklığı yakalamak isteyen müşterilerimiz için özenle seçilmiş kumaşlar ve dikkatli işçilikle hazırlanmaktadır.</p>
-                    </div>
-                </div>
-            </div>
+    <section class="about-section">
+        <h2>Hikayemiz</h2>
+        <div class="content">
+            <p>2020 yılında bebeklerin narin cildine ve ihtiyaçlarına uygun ürünler tasarlama tutkusu ile yola çıkan GKATELIERS, müşteri memnuniyetini ön planda tutarak güvenilir ve kaliteli bebek kıyafetleri ile havlular sunmaktadır. Her bir ürünümüz, bebeklerin konforunu ve güvenliğini sağlarken aynı zamanda şıklığıyla da fark yaratır.</p>
+
+            <p>GKATELIERS olarak, en değerli varlıklarımız olan bebeklerin hassasiyetini göz önünde bulundurarak doğal ve cilde dost malzemelerle çalışıyoruz. Tasarımlarımızda yumuşak dokular ve nefes alabilir kumaşlar tercih ederek, miniklerin gün boyunca rahat etmesini sağlıyoruz. Bebek kıyafetlerimiz, hem gündelik kullanım hem de özel günler için şık ve sevimli seçenekler sunar.</p>
+
+            <p>Havlu koleksiyonlarımız ise üstün emicilik özelliği ve yumuşacık dokusuyla bebeğinizin banyodan sonra keyifle sarılmasını sağlar. Özenle seçilmiş malzemelerden üretilen havlularımız, bebek cildine zarar vermeyecek şekilde tasarlanmıştır ve dayanıklılığıyla uzun süre kullanılabilir.</p>
+
+            <p>Müşterilerimize sunduğumuz her ürün, yalnızca bir ihtiyaç değil, aynı zamanda sıcak bir dokunuştur. Yenilikçi tasarımlarımızla bebeklerin güvenliğini ve ebeveynlerin memnuniyetini bir araya getiriyor, modayı işlevsellikle buluşturuyoruz.</p>
+
+            <p>GKATELIERS ile bebeklerinize en iyisini sunmanın huzurunu yaşayın. Şıklığı, kaliteyi ve konforu bir arada bulabileceğiniz ürünlerimizle siz değerli müşterilerimizin her zaman yanında olmaktan mutluluk duyuyoruz. Her bir ürünümüzde, hem bebekleriniz hem de sizler için bir parça sevgimizi eklemeye devam ediyoruz.</p>
         </div>
     </section>
 
     <section class="about-values">
         <div class="container">
-            <h2 class="section-title">Değerlerimiz</h2>
             <div class="row">
                 <div class="col-md-4">
                     <div class="value-card">
-                        <i class="bi bi-star-fill"></i>
-                        <h3>Kalite</h3>
-                        <p>En iyi malzemeler ve işçilik standardıyla üretim yapıyoruz.</p>
+                        <img src="~/images/organikpamuk.png" alt="Organik Pamuk" class="value-image">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="value-card">
-                        <i class="bi bi-heart-fill"></i>
-                        <h3>Müşteri Memnuniyeti</h3>
-                        <p>Müşterilerimizin memnuniyeti bizim önceliğimizdir.</p>
+                        <img src="~/images/uretimtesisi.png" alt="Üretim Tesisi" class="value-image">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="value-card">
-                        <i class="bi bi-lightning-fill"></i>
-                        <h3>Yenilikçilik</h3>
-                        <p>Sürekli kendimizi yeniliyor ve trendleri takip ediyoruz.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="about-team">
-        <div class="container">
-            <h2 class="section-title">Ekibimiz</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="team-card">
-                        <img src="/images/staff.png" alt="Takım Üyesi" class="team-image">
-                        <h3>Ahmet Yılmaz</h3>
-                        <p>Kurucu & CEO</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="team-card">
-                        <img src="/images/staff.png" alt="Takım Üyesi" class="team-image">
-                        <h3>Ayşe Demir</h3>
-                        <p>Baş Tasarımcı</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="team-card">
-                        <img src="/images/staff.png" alt="Takım Üyesi" class="team-image">
-                        <h3>Mehmet Kaya</h3>
-                        <p>Üretim Müdürü</p>
+                        <img src="~/images/surdurulebilir.png" alt="Sürdürülebilir" class="value-image">
                     </div>
                 </div>
             </div>

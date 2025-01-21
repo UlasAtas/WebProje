@@ -7,6 +7,7 @@
     <title>@ViewData["Title"] - GKATELIERS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .navbar-nav .nav-link {
             color: #4a4a4a !important;
@@ -29,7 +30,9 @@
 <body>
     <nav class="navbar navbar-expand-lg shadow-sm" style="background-color: rgba(220,219,214,255);">
         <div class="container">
-            <a class="navbar-brand" href="/">GKATELIERS</a>
+            <a class="navbar-brand" href="/">
+                <img src="~/images/GK.jpg" alt="GKATELIERS Logo" style="height: 50px; width: auto;">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -76,6 +79,12 @@
                                         <i class="bi bi-box"></i> Siparişlerim
                                     </a>
                                 </li>
+                                 @if (Context.Session.GetString("KullaniciRol") == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                            </li>
+                        }
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <a class="dropdown-item" href="@Url.Action("OturumKapat", "Kullanici")">
@@ -90,6 +99,7 @@
                                   <i class="bi bi-cart3"></i>
                              </a>
                         </li>
+                       
                     }
                 </ul>
             </div>
@@ -100,12 +110,7 @@
         @RenderBody()
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    @if (Context.Session.GetString("KullaniciRol") == "Admin")
-    {
-        <li class="nav-item">
-            <a class="nav-link" asp-controller="Admin" asp-action="Index">Admin Panel</a>
-        </li>
-    }
+    
+   
 </body>
 </html>

@@ -39,6 +39,6 @@ namespace WebProje.Models
 		public required string TelNo { get; set; }
 
 		public virtual ICollection<Siparis>? Siparisler { get; set; }
-		public virtual Adres Adres { get; set; }
+		public virtual Adres? Adres { get; set; }
 	}
 }
