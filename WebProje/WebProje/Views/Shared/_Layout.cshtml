@@ -7,11 +7,27 @@
     <title>@ViewData["Title"] - GKATELIERS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .navbar-nav .nav-link {
+            color: #4a4a4a !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #666 !important;
+        }
+
+        .navbar-brand {
+            color: #4a4a4a !important;
+            font-weight: bold;
+        }
+    </style>
     @RenderSection("Styles", required: false)
     @await RenderSectionAsync("Scripts", required: false)
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg shadow-sm">
+    <nav class="navbar navbar-expand-lg shadow-sm" style="background-color: rgba(220,219,214,255);">
         <div class="container">
             <a class="navbar-brand" href="/">GKATELIERS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -19,7 +35,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto gap-3">
                     <li class="nav-item">
                         <a class="nav-link active" href="@Url.Action("Index", "Home")">Ana Sayfa</a>
                     </li>
@@ -32,7 +48,14 @@
                     @if (Context.Session.GetString("KullaniciId") == null)
                     {
                         <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("KullaniciGiris", "Kullanici")">Giriş Yap</a>
+                            <a class="nav-link active" href="@Url.Action("KullaniciGiris", "Kullanici")">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>Giriş Yap
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("KullaniciKayit", "Kullanici")">
+                                <i class="bi bi-person-plus me-1"></i>Üye Ol
+                            </a>
                         </li>
                     }
                     else
@@ -73,32 +96,11 @@
         </div>
     </nav>
 
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="loginToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Hoş Geldiniz</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                @TempData["Mesaj"]
-            </div>
-        </div>
-    </div>
-
     <main class="container mt-4">
         @RenderBody()
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    @if (TempData["Mesaj"] != null)
-    {
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var toast = new bootstrap.Toast(document.getElementById('loginToast'));
-                toast.show();
-            });
-        </script>
-    }
     @if (Context.Session.GetString("KullaniciRol") == "Admin")
     {
         <li class="nav-item">

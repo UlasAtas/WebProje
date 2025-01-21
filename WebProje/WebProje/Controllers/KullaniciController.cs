@@ -55,16 +55,13 @@ namespace WebProje.Controllers
 					context.Add(kullanici);
 					await context.SaveChangesAsync();
 
-					TempData["Basarili"] = "Hesabınız başarıyla oluşturuldu. Lütfen giriş yapın.";
 					return RedirectToAction(nameof(KullaniciGiris));
 				}
 				catch (Exception hata)
 				{
 					ModelState.AddModelError("", "Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.");
 				}
-                // İlk kullanıcıyı admin yapmak için:
-                kullanici.Rol = (await context.Kullanici.CountAsync() == 0) ? "Admin" : "Kullanici";
-            }
+			}
 
 			return View(kullanici);
 		}
@@ -97,14 +94,12 @@ namespace WebProje.Controllers
 			HttpContext.Session.SetString("KullaniciId", kullanici.KullaniciId.ToString());
 			HttpContext.Session.SetString("KullaniciRol", kullanici.Rol);
 			HttpContext.Session.SetString("KullaniciAdi", $"{kullanici.Ad} {kullanici.Soyad}");
-			TempData["Mesaj"] = $"Hoş geldiniz, {kullanici.Ad}!";
 			return RedirectToAction("Index", "Home");
 		}
 
 		public IActionResult OturumKapat()
 		{
 			HttpContext.Session.Clear();
-			TempData["Mesaj"] = "Başarıyla çıkış yaptınız.";
 			return RedirectToAction("Index", "Home");
 		}
 

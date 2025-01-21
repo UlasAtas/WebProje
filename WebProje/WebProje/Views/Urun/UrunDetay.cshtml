@@ -1,48 +1,131 @@
 ﻿@model Urun
 
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Model.UrunAdi</title>
-    <link rel="stylesheet" href="~/css/urundetay.css">
-</head>
-<body>
-    <div class="container">
-        <div class="product-container">
-            <div class="product-images">
-                <div class="main-image">
-                    <img src="@Model.ResimUrl" alt="@Model.UrunAdi" class="active">
-                </div>
+@{
+    ViewData["Title"] = "Ürün Detay";
+}
+
+@section Styles {
+    <style>
+        body {
+            background: url('/images/background.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding-top: 20px; /* margin-top yerine padding-top kullanıyoruz */
+        }
+
+        .product-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .main-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-details {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            margin-top: 30px;
+        }
+
+        .description-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .description-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .product-actions {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: rgb(219,201,187);
+            color: #4a4a4a;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        @@media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+}
+
+<div class="container">
+    <div class="product-container">
+        <div class="product-images">
+            <div class="main-image">
+                <img src="@Model.ResimUrl" alt="@Model.UrunAdi">
             </div>
-            <div class="product-details">
-                <h1 class="product-title">@Model.UrunAdi</h1>
-                <div class="product-price">@Model.Fiyat.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</div>
-                <div class="product-actions">
-                    @* <div class="quantity-selector">
-                        <label class="quantity-label">Adet</label>
-                        <select class="quantity-select">
-                            @for (int i = 1; i <= 10; i++)
-                            {
-                                    <option value="@i">@i</option>
-                            }
-                        </select>
-                    </div> *@
-                    <button class="btn btn-primary">Satın Al</button>
-                    <form asp-controller="Sepet" asp-action="AddToCart" method="post">
-                        <input type="hidden" name="productId" value="@Model.UrunId" />
-                        <button class="btn btn-secondary">Sepete Ekle</button>
-                    </form>
-                </div>
-                <div class="product-description">
-                    <h2 class="description-title">Ürün Açıklaması</h2>
-                    <div class="description-content">
-                        <p>@Model.Aciklama</p>
-                    </div>
+        </div>
+        <div class="product-details">
+            <h1 class="product-title">@Model.UrunAdi</h1>
+            <div class="product-price">@Model.Fiyat.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</div>
+            <div class="product-actions">
+                @* <div class="quantity-selector">
+                    <label class="quantity-label">Adet</label>
+                    <select class="quantity-select">
+                        @for (int i = 1; i <= 10; i++)
+                        {
+                                <option value="@i">@i</option>
+                        }
+                    </select>
+                </div> *@
+                <button class="btn btn-primary">Satın Al</button>
+                <form asp-controller="Sepet" asp-action="AddToCart" method="post">
+                    <input type="hidden" name="productId" value="@Model.UrunId" />
+                    <button class="btn btn-secondary">Sepete Ekle</button>
+                </form>
+            </div>
+            <div class="product-description">
+                <h2 class="description-title">Ürün Açıklaması</h2>
+                <div class="description-content">
+                    <p>@Model.Aciklama</p>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>

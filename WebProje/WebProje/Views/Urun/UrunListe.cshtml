@@ -5,42 +5,152 @@
 }
 
 @section Styles {
-           <link rel="stylesheet" href="~/css/urunliste.css" />       
+    <style>
+        body {
+            background: url('/images/background.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 8px 16px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            color: #4a4a4a;
+        }
+
+        .details-btn {
+            background-color: rgb(162,184,195);
+        }
+
+        .cart-btn {
+            background-color: rgb(196,158,137);
+        }
+
+        .buy-btn {
+            background-color: rgb(161,174,164);
+        }
+
+        .button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .product-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 10px 0;
+        }
+
+        form {
+            width: 100%;
+        }
+    </style>
 }
 
-<div class="products-container">
-    @foreach (var urun in Model)
-    {
+<div class="container">
+    <div class="products-container">
+        @foreach (var urun in Model)
+        {
             <div class="product-card">
                 <img src="@urun.ResimUrl" alt="@urun.UrunAdi" class="product-image">
                 <h3 class="product-title">@urun.UrunAdi</h3>
                 <div class="product-price">@urun.Fiyat.ToString("N2") TL</div>
-
-                <a href="@Url.Action("UrunDetay", new { id = urun.UrunId })" class="button details-btn">
-                    Detaylar
-                </a>
-                      
-                                  
-                           <form asp-controller="Sepet" asp-action="AddToCart" method="post">
-                               <input type="hidden" name="productId" value="@urun.UrunId" />
-                               <button type="submit" class="button cart-btn">Sepete Ekle</button>
-                           </form>
-         
-                           <form asp-action="BuyNow" method="post">
-                               <input type="hidden" name="id" value="@urun.UrunId" />
-                               <button type="submit" class="button buy-btn">Satın Al</button>
-                           </form>
-
-                      
+                
+                <div class="product-actions">
+                    <a href="@Url.Action("UrunDetay", new { id = urun.UrunId })" class="button details-btn">
+                        Detaylar
+                    </a>
+                              
+                    <form asp-controller="Sepet" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="productId" value="@urun.UrunId" />
+                        <button type="submit" class="button cart-btn">Sepete Ekle</button>
+                    </form>
+             
+                    <form asp-action="BuyNow" method="post">
+                        <input type="hidden" name="id" value="@urun.UrunId" />
+                        <button type="submit" class="button buy-btn">Satın Al</button>
+                    </form>
+                </div>
             </div>
-    }
+        }
+    </div>
 </div>
 
-<div class="container">
-    @if (TempData["UyariMesaji"] != null)
-    {
-            <div class="alert alert-warning" role="alert">
-            @TempData["UyariMesaji"]
+@if (TempData["UyariMesaji"] != null)
+{
+    <div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1080; margin-top: 70px;">
+        <div id="uyariToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: #dc3545; color: white;">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>@TempData["UyariMesaji"]
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-    }
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toast = new bootstrap.Toast(document.getElementById('uyariToast'), {
+                delay: 3000
+            });
+            toast.show();
+        });
+    </script>
+}
 

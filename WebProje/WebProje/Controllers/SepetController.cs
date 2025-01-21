@@ -32,8 +32,7 @@ namespace WebProje.Controllers
 		{
 			if (HttpContext.Session.GetString("KullaniciId") == null)
 			{
-				TempData["UyariMesaji"] = "Lütfen giriş yapmadan bu işlemi gerçekleştiremezsiniz!";
-				return RedirectToAction("UrunListe", "Urun");
+				return RedirectToAction("KullaniciGiris", "Kullanici");
 			}
 
 			var urun = await _context.Urun
@@ -58,7 +57,7 @@ namespace WebProje.Controllers
 					UrunId = urun.UrunId,
 					UrunAdi = urun.UrunAdi,
 					Fiyat = urun.Fiyat,
-					ResimUrl = urun.ResimUrl,
+					ResimUrl = urun.ResimUrl ?? string.Empty,
 					Adet = quantity
 				});
 			}

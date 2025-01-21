@@ -64,24 +64,26 @@
                 </label>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Hesap Oluştur</button>
-
-            <div class="links-container mt-4">
-                <span>Zaten hesabınız var mı?</span>
-                <a asp-controller="Kullanici" asp-action="KullaniciGiris" class="login-link">Giriş Yap</a>
-            </div>
+            <button type="submit" class="btn btn-primary w-100">Üye Ol</button>
         </form>
 
         <div class="social-login">
-            <p class="text-center">veya şununla devam edin</p>
+            <p>Veya şununla devam et:</p>
             <div class="social-buttons">
-                <button type="button" class="btn btn-outline-dark w-100 mb-2">
-                    <i class="bi bi-google"></i> Google ile Devam Et
-                </button>
-                <button type="button" class="btn btn-outline-dark w-100">
-                    <i class="bi bi-facebook"></i> Facebook ile Devam Et
-                </button>
+                <a href="#" class="btn btn-google">
+                    <i class="bi bi-google"></i>
+                    Google ile devam et
+                </a>
+                <a href="#" class="btn btn-facebook">
+                    <i class="bi bi-facebook"></i>
+                    Facebook ile devam et
+                </a>
             </div>
+        </div>
+
+        <div class="links-container">
+            <span>Zaten hesabınız var mı?</span>
+            <a href="@Url.Action("KullaniciGiris", "Kullanici")" class="login-link">Giriş Yap</a>
         </div>
     </div>
 </div>
