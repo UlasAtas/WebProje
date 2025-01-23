@@ -3,52 +3,58 @@
     ViewData["Title"] = "Ürün Yönetimi";
 }
 
-<div class="container mt-4">
-    <h2>Ürün Yönetimi</h2>
-    <div class="mb-3">
-        <a asp-action="UrunEkle" class="btn btn-success">Yeni Ürün Ekle</a>
-    </div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
 
-    @if (TempData["Basarili"] != null)
-    {
-        <div class="alert alert-success">@TempData["Basarili"]</div>
-    }
-    @if (TempData["Hata"] != null)
-    {
-        <div class="alert alert-danger">@TempData["Hata"]</div>
-    }
+<div class="admin-container">
+    <div class="admin-box">
+        <h2>Ürün Yönetimi</h2>
+        <div class="mb-3">
+            <a asp-action="UrunEkle" class="btn btn-success">Yeni Ürün Ekle</a>
+        </div>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Ürün Adı</th>
-                <th>Fiyat</th>
-                <th>Stok</th>
-                <th>Durum</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var urun in Model)
-            {
+        @if (TempData["Basarili"] != null)
+        {
+            <div class="alert alert-success">@TempData["Basarili"]</div>
+        }
+        @if (TempData["Hata"] != null)
+        {
+            <div class="alert alert-danger">@TempData["Hata"]</div>
+        }
+
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@urun.UrunId</td>
-                    <td>@urun.UrunAdi</td>
-                    <td>@urun.Fiyat.ToString("C2")</td>
-                    <td>@urun.StokMiktari</td>
-                    <td>@(urun.AktifMi ? "Aktif" : "Pasif")</td>
-                    <td>
-                        <form asp-action="UrunSil" asp-route-id="@urun.UrunId" method="post" style="display: inline;">
-                            @Html.AntiForgeryToken()
-                            <button type="submit" class="btn btn-danger btn-sm" 
-                                    onclick="return confirm('Bu ürünü silmek istediğinizden emin misiniz?')">
-                                Sil
-                            </button>
-                        </form>
-                    </td>
+                    <th>ID</th>
+                    <th>Ürün Adı</th>
+                    <th>Fiyat</th>
+                    <th>Stok</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var urun in Model)
+                {
+                    <tr>
+                        <td>@urun.UrunId</td>
+                        <td>@urun.UrunAdi</td>
+                        <td>@urun.Fiyat.ToString("C2")</td>
+                        <td>@urun.StokMiktari</td>
+                        <td>@(urun.AktifMi ? "Aktif" : "Pasif")</td>
+                        <td>
+                            <form asp-action="UrunSil" asp-route-id="@urun.UrunId" method="post" style="display: inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger btn-sm" 
+                                        onclick="return confirm('Bu ürünü silmek istediğinizden emin misiniz?')">
+                                    Sil
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

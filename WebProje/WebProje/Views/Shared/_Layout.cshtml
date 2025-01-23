@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-lg shadow-sm" style="background-color: rgba(220,219,214,255);">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="~/images/GK.jpg" alt="GKATELIERS Logo" style="height: 50px; width: auto;">
+                <img src="~/images/GK-logo.png" alt="GKATELIERS Logo" style="height: 60px; width: auto;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,8 +81,10 @@
                                 </li>
                                  @if (Context.Session.GetString("KullaniciRol") == "Admin")
                         {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                            <li>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Admin")">
+                                    <i class="bi bi-gear-fill me-1"></i>Admin Panel
+                                </a>
                             </li>
                         }
                                 <li><hr class="dropdown-divider"></li>
@@ -110,7 +112,46 @@
         @RenderBody()
     </main>
 
-    
+    <footer class="mt-5 py-4 shadow-sm" style="background-color: rgba(220,219,214,255);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3 text-dark">GKATELIERS</h5>
+                    <p class="text-muted">Bebekleriniz için özenle tasarlanmış, kaliteli ve konforlu ürünler.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="me-3 text-dark"><i class="bi bi-facebook"></i></a>
+                        <a href="https://www.instagram.com/gkateliers/" class="me-3 text-dark"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="me-3 text-dark"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3 text-dark">Hızlı Linkler</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="@Url.Action("Index", "Home")" class="text-decoration-none text-muted">Ana Sayfa</a></li>
+                        <li class="mb-2"><a href="@Url.Action("Index", "Hakkimizda")" class="text-decoration-none text-muted">Hakkımızda</a></li>
+                        <li class="mb-2"><a href="@Url.Action("UrunListe", "Urun")" class="text-decoration-none text-muted">Ürünler</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3 text-dark">İletişim</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2 text-muted"><i class="bi bi-geo-alt me-2"></i>Gemlik/Bursa</li>
+                        <li class="mb-2 text-muted"><i class="bi bi-telephone me-2"></i>+90 (531) 452 19 19</li>
+                        <li class="mb-2 text-muted"><i class="bi bi-envelope me-2"></i>info@gkateliers.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row mt-3">
+                <div class="col-12">
+                    <hr class="text-muted">
+                    <p class="text-center text-muted mb-0">&copy; @DateTime.Now.Year GKATELIERS - Tüm Hakları Saklıdır</p>
+                </div>
+            </div>
+        </div>
+    </footer>
    
 </body>
 </html>

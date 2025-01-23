@@ -3,104 +3,100 @@
     ViewData["Title"] = "Sepetim";
 }
 
-<div class="container mt-4">
-    <div class="row">
-        <div class="col">
-            <h2 class="mb-4">Alışveriş Sepetim</h2>
+@section Styles {
+    <link rel="stylesheet" href="~/css/sepet.css" />
+}
 
-            @if (Model.Urunler.Any())
-            {
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead class="table-light">
-                                <tr>
-                                    <th scope="col">Ürün</th>
-                                    <th scope="col" class="text-end">Birim Fiyat</th>
-                                    <th scope="col" class="text-center">Adet</th>
-                                    <th scope="col" class="text-end">Toplam</th>
-                                    <th scope="col" class="text-center">İşlemler</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var item in Model.Urunler)
-                            {
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <!-- Ürün resmi -->
-                                                    <img src="@item.ResimUrl" alt="@item.UrunAdi" 
-                                                         class="img-fluid rounded" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
-                                                    <!-- Ürün adı -->
-                                                    <h6 class="mb-0">@item.UrunAdi</h6>
-                                                </div>
-                                            </td>
-                                            <td class="text-end">
-                                        @item.Fiyat.ToString("C2")
-                                            </td>
-                                            <td class="text-center" style="width: 150px;">
-                                                <form asp-action="UpdateQuantity" method="post" class="d-inline">
-                                                    <div class="input-group input-group-sm">
-                                                        <input type="hidden" name="productId" value="@item.UrunId" />                                                    
-                                                        <input type="number" name="quantity" value="@item.Adet" 
-                                                                       min="1" class="form-control text-center" onchange="this.form.submit();" />                                                                 
-                                                    </div>
-                                                </form>
-                                            </td>
-                                            <td class="text-end">
-                                        @item.Toplam.ToString("C2")
-                                            </td>
-                                            <td class="text-center">
-                                                <form asp-action="RemoveFromCart" method="post" class="d-inline">
-                                                    <input type="hidden" name="productId" value="@item.UrunId" />
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                            }
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="3" class="text-end">
-                                        <strong>Toplam:</strong>
-                                    </td>
-                                    <td class="text-end">
-                                        <strong>@Model.TotalAmount.ToString("C2")</strong>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+<div class="cart-container">
+    <div class="cart-box">
+        <h2>Alışveriş Sepetim</h2>
 
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
-                                <i class="bi bi-arrow-left"></i> Alışverişe Devam Et
-                            </a>
-                        </div>
-                        <div class="col-md-6 text-end">
-                            <form asp-action="ClearCart" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-warning me-2">
-                                    <i class="bi bi-cart-x"></i> Sepeti Temizle
-                                </button>
-                            </form>
-                            <a href="@Url.Action("Checkout", "Order")" class="btn btn-success">
-                                <i class="bi bi-cart-check"></i> Siparişi Tamamla
-                            </a>
-                        </div>
-                    </div>
-            }
-            else
-            {
-                    <div class="alert alert-info">
-                        <i class="bi bi-cart"></i> Sepetinizde ürün bulunmamaktadır.
-                        <a href="@Url.Action("Index", "Home")" class="alert-link">
-                            Alışverişe başlamak için tıklayın
-                        </a>.
-                    </div>
-            }
-        </div>
+        @if (Model.Urunler.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Ürün</th>
+                            <th scope="col" class="text-end">Birim Fiyat</th>
+                            <th scope="col" class="text-center">Adet</th>
+                            <th scope="col" class="text-end">Toplam</th>
+                            <th scope="col" class="text-center">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Urunler)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="@item.ResimUrl" alt="@item.UrunAdi" 
+                                             class="img-fluid rounded" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
+                                        <h6 class="mb-0">@item.UrunAdi</h6>
+                                    </div>
+                                </td>
+                                <td class="text-end">@item.Fiyat.ToString("C2")</td>
+                                <td class="text-center" style="width: 150px;">
+                                    <form asp-action="UpdateQuantity" method="post" class="d-inline">
+                                        <div class="input-group input-group-sm">
+                                            <input type="hidden" name="productId" value="@item.UrunId" />                                                    
+                                            <input type="number" name="quantity" value="@item.Adet" 
+                                                   min="1" class="form-control text-center" onchange="this.form.submit();" />                                                                 
+                                        </div>
+                                    </form>
+                                </td>
+                                <td class="text-end">@item.Toplam.ToString("C2")</td>
+                                <td class="text-center">
+                                    <form asp-action="RemoveFromCart" method="post" class="d-inline">
+                                        <input type="hidden" name="productId" value="@item.UrunId" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-end">
+                                <strong>Toplam:</strong>
+                            </td>
+                            <td class="text-end">
+                                <strong>@Model.TotalAmount.ToString("C2")</strong>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Alışverişe Devam Et
+                    </a>
+                </div>
+                <div class="col-md-6 text-end">
+                    <form asp-action="ClearCart" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-warning me-2">
+                            <i class="bi bi-cart-x"></i> Sepeti Temizle
+                        </button>
+                    </form>
+                    <a href="@Url.Action("Checkout", "Order")" class="btn btn-success">
+                        <i class="bi bi-cart-check"></i> Siparişi Tamamla
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <i class="bi bi-cart"></i> Sepetinizde ürün bulunmamaktadır.
+                <a href="@Url.Action("Index", "Home")" class="alert-link">
+                    Alışverişe başlamak için tıklayın
+                </a>.
+            </div>
+        }
     </div>
 </div>

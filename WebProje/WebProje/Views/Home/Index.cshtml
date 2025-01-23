@@ -1,103 +1,48 @@
-﻿<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/anasayfa.css">
-</head>
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
 
+<link rel="stylesheet" href="~/css/anasayfa.css">
 
+<!-- Video Section -->
+<div class="video-container">
+    <video autoplay muted loop playsinline class="hero-video">
+        <source src="~/images/video.mp4" type="video/mp4">
+        Tarayıcınız video etiketini desteklemiyor.
+    </video>
+</div>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>Bebeğiniz İçin Özel Tasarımlar</h1>
-        <p>İsme özel tasarlanmış, %100 pamuklu, kaliteli bebek kıyafetleri...</p>
-        <a href="../Urun/UrunListe" class="cta-button">Koleksiyonu Keşfet</a>
-    </div>
-</section>
-
-
-<section class="customization">
-    <h2>Kişiselleştirme Nasıl Çalışır?</h2>
-    <div class="custom-steps">
-        <div class="step-card">
-            <i class="fas fa-tshirt"></i>
-            <h3>1. Ürün Seçimi</h3>
-            <p>Koleksiyonumuzdan beğendiğiniz ürünü seçin</p>
-        </div>
-        <div class="step-card">
-            <i class="fas fa-pencil-alt"></i>
-            <h3>2. Kişiselleştirme</h3>
-            <p>İsim, tarih veya özel mesajınızı belirleyin</p>
-        </div>
-        <div class="step-card">
-            <i class="fas fa-heart"></i>
-            <h3>3. Özel Üretim</h3>
-            <p>Siparişiniz özenle hazırlanıp kargolanır</p>
-        </div>
-    </div>
-</section>
-
-
-<section class="categories">
-    <h2>Kategoriler</h2>
-    <div class="category-grid">
-        <div class="category-card">
-            <img src="~/images/bebek.png.jpg" alt="Yeni Doğan" class="category-image">
-            <div class="category-content">
-                <h3>Yeni Doğan</h3>
-                <p>0-3 Ay</p>
+<div class="container mt-4">
+    <section class="customization">
+        <h2>Kişiselleştirilmiş Tasarımlar</h2>
+        <div class="custom-steps">
+            <div class="step-card">
+                <img src="~/images/photo.png" alt="Fotoğraflı Ürünler" class="step-image">
+            </div>
+            <div class="step-card">
+                <img src="~/images/fenerbahce-havlu.png" alt="Fenerbahçe Havlu" class="step-image">
+            </div>
+            <div class="step-card">
+                <img src="~/images/yastik.png" alt="Özel Yastık" class="step-image">
             </div>
         </div>
-        <div class="category-card">
-            <img src="~/images/bebek.jpg" alt="Bebek" class="category-image">
-            <div class="category-content">
-                <h3>Bebek</h3>
-                <p>3-24 Ay</p>
-            </div>
-        </div>
-        <div class="category-card">
-            <img src="~/images/bebek.jpg" alt="Küçük Çocuk" class="category-image">
-            <div class="category-content">
-                <h3>Küçük Çocuk</h3>
-                <p>2-4 Yaş</p>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
-
-<section class="featured">
-    <h2>Öne Çıkan Ürünler</h2>
-    <div class="product-grid">
-        <div class="product-card">
-            <img src="~/images/bebek.png.jpg" alt="Ürün 1" class="product-image">
-            <div class="product-content">
-                <h3>İsme Özel Tulum</h3>
-                <p>%100 Organik Pamuk</p>
+    <section class="featured">
+        <h2>Öne Çıkan Ürünler</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="~/images/one-cikanlar-1.jpg" alt="Öne Çıkan Ürün 1" class="product-image">
+            </div>
+            <div class="product-card">
+                <img src="~/images/one-cikanlar-2.jpg" alt="Öne Çıkan Ürün 2" class="product-image">
+            </div>
+            <div class="product-card">
+                <img src="~/images/one-cikanlar-3.jpg" alt="Öne Çıkan Ürün 3" class="product-image">
+            </div>
+            <div class="product-card">
+                <img src="~/images/one-cikanlar-4.jpg" alt="Öne Çıkan Ürün 4" class="product-image">
             </div>
         </div>
-        <div class="product-card">
-            <img src="~/images/product2.jpg" alt="Ürün 2" class="product-image">
-            <div class="product-content">
-                <h3>Kişiye Özel Body</h3>
-                <p>Nakış İşlemeli</p>
-            </div>
-        </div>
-        <div class="product-card">
-            <img src="~/images/product3.jpg" alt="Ürün 3" class="product-image">
-            <div class="product-content">
-                <h3>İsimli Battaniye</h3>
-                <p>Yumuşak Dokulu</p>
-            </div>
-        </div>
-        <div class="product-card">
-            <img src="~/images/product4.jpg" alt="Ürün 4" class="product-image">
-            <div class="product-content">
-                <h3>Özel Tasarım Set</h3>
-                <p>3'lü Takım</p>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+</div>
