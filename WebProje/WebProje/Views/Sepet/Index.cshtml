@@ -37,7 +37,7 @@
                                 </td>
                                 <td class="text-end">@item.Fiyat.ToString("C2")</td>
                                 <td class="text-center" style="width: 150px;">
-                                    <form asp-action="UpdateQuantity" method="post" class="d-inline">
+                                    <form asp-action="AdetGuncelle" method="post" class="d-inline">
                                         <div class="input-group input-group-sm">
                                             <input type="hidden" name="productId" value="@item.UrunId" />                                                    
                                             <input type="number" name="quantity" value="@item.Adet" 
@@ -47,7 +47,7 @@
                                 </td>
                                 <td class="text-end">@item.Toplam.ToString("C2")</td>
                                 <td class="text-center">
-                                    <form asp-action="RemoveFromCart" method="post" class="d-inline">
+                                    <form asp-action="SepettenSil" method="post" class="d-inline">
                                         <input type="hidden" name="productId" value="@item.UrunId" />
                                         <button type="submit" class="btn btn-sm btn-outline-danger">
                                             <i class="bi bi-trash"></i>
@@ -78,14 +78,14 @@
                     </a>
                 </div>
                 <div class="col-md-6 text-end">
-                    <form asp-action="ClearCart" method="post" class="d-inline">
+                    <form asp-action="SepetiTemizle" method="post" class="d-inline">
                         <button type="submit" class="btn btn-warning me-2">
                             <i class="bi bi-cart-x"></i> Sepeti Temizle
                         </button>
                     </form>
                     @foreach(var item in Model.Urunler)
                     {
-                        <form asp-controller="Urun" asp-action="BuyNow" method="post">
+                        <form asp-controller="Urun" asp-action="SatinAl" method="post">
                             <input type ="hidden" name="id" value="@item.UrunId"/>
                             <button type="submit">Siparişi Tamamla</button>
                         </form>

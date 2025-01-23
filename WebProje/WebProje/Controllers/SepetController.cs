@@ -28,7 +28,7 @@ namespace WebProje.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
+		public async Task<IActionResult> SepeteEkle(int productId, int quantity = 1)
 		{
 			if (HttpContext.Session.GetString("KullaniciId") == null)
 			{
@@ -67,7 +67,7 @@ namespace WebProje.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult UpdateQuantity(int productId, int quantity)
+		public IActionResult AdetGuncelle(int productId, int quantity)
 		{
 			var cart = HttpContext.Session.GetJson<Sepet>(CartSessionKey);
 
@@ -93,7 +93,7 @@ namespace WebProje.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult RemoveFromCart(int productId)
+		public IActionResult SepettenSil(int productId)
 		{
 			var cart = HttpContext.Session.GetJson<Sepet>(CartSessionKey);
 
@@ -111,7 +111,7 @@ namespace WebProje.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public IActionResult ClearCart()
+		public IActionResult SepetiTemizle()
 		{
 			HttpContext.Session.Remove(CartSessionKey);
 			return RedirectToAction("Index");

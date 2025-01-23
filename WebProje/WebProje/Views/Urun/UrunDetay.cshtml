@@ -114,11 +114,11 @@
                         }
                     </select>
                 </div> *@
-                <form asp-controller="Urun" asp-action="BuyNow" method="post">
+                <form asp-controller="Urun" asp-action="SatinAl" method="post">
                     <input type="hidden" name="id" value="@Model.UrunId" />
                    <button class="btn btn-primary">Satın Al</button>
                 </form>
-                <form asp-controller="Sepet" asp-action="AddToCart" method="post">
+                <form asp-controller="Sepet" asp-action="SepeteEkle" method="post">
                     <input type="hidden" name="productId" value="@Model.UrunId" />
                     <button class="btn btn-secondary">Sepete Ekle</button>
                 </form>

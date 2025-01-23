@@ -116,12 +116,12 @@
                         Detaylar
                     </a>
                               
-                    <form asp-controller="Sepet" asp-action="AddToCart" method="post">
+                    <form asp-controller="Sepet" asp-action="SepeteEkle" method="post">
                         <input type="hidden" name="productId" value="@urun.UrunId" />
                         <button type="submit" class="button cart-btn">Sepete Ekle</button>
                     </form>
                     
-                    <form asp-controller="Urun" asp-action="BuyNow" method="post">
+                    <form asp-controller="Urun" asp-action="SatinAl" method="post">
                         <input type="hidden" name="id" value="@urun.UrunId" />
                         <button type="submit" class="button buy-btn">Satın Al</button>
                     </form>

@@ -25,7 +25,7 @@ namespace WebProje.Controllers
 		}
 
 
-		public async Task<IActionResult> BuyNow(int id)
+		public async Task<IActionResult> SatinAl(int id)
 		{
 
 			if (HttpContext.Session.GetString("KullaniciId") == null)
