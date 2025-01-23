@@ -25,17 +25,30 @@ namespace WebProje.Controllers
 		}
 
 
-		[HttpPost]
 		public async Task<IActionResult> BuyNow(int id)
 		{
+
+			if (HttpContext.Session.GetString("KullaniciId") == null)
+			{
+				return RedirectToAction("KullaniciGiris", "Kullanici");
+			}
+
 			var urun = await _context.Urun.FindAsync(id);
 			if (urun == null)
 			{
 				return NotFound();
 			}
-
 			
-			return RedirectToAction("Checkout", "Order", new { productId = id });
+			var sepet = new Sepet();
+			sepet.Urunler.Add(new SepetUrun
+			{
+				UrunId = urun.UrunId,
+				UrunAdi = urun.UrunAdi,
+				Adet = 1,
+				Fiyat = urun.Fiyat 
+			});
+
+			return View("SatinAl", sepet);
 		}
 
 		public async Task<IActionResult> UrunDetay(int id)

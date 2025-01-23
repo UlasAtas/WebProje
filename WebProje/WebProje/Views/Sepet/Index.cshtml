@@ -73,7 +73,7 @@
 
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                    <a href="@Url.Action("UrunListe", "Urun")" class="btn btn-outline-secondary">
                         <i class="bi bi-arrow-left"></i> Alışverişe Devam Et
                     </a>
                 </div>
@@ -83,9 +83,13 @@
                             <i class="bi bi-cart-x"></i> Sepeti Temizle
                         </button>
                     </form>
-                    <a href="@Url.Action("Checkout", "Order")" class="btn btn-success">
-                        <i class="bi bi-cart-check"></i> Siparişi Tamamla
-                    </a>
+                    @foreach(var item in Model.Urunler)
+                    {
+                        <form asp-controller="Urun" asp-action="BuyNow" method="post">
+                            <input type ="hidden" name="id" value="@item.UrunId"/>
+                            <button type="submit">Siparişi Tamamla</button>
+                        </form>
+                    }
                 </div>
             </div>
         }
@@ -93,7 +97,7 @@
         {
             <div class="alert alert-info">
                 <i class="bi bi-cart"></i> Sepetinizde ürün bulunmamaktadır.
-                <a href="@Url.Action("Index", "Home")" class="alert-link">
+                    <a href="@Url.Action("UrunListe", "Urun")" class="alert-link">
                     Alışverişe başlamak için tıklayın
                 </a>.
             </div>

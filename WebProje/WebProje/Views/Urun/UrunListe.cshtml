@@ -120,8 +120,8 @@
                         <input type="hidden" name="productId" value="@urun.UrunId" />
                         <button type="submit" class="button cart-btn">Sepete Ekle</button>
                     </form>
-             
-                    <form asp-action="BuyNow" method="post">
+                    
+                    <form asp-controller="Urun" asp-action="BuyNow" method="post">
                         <input type="hidden" name="id" value="@urun.UrunId" />
                         <button type="submit" class="button buy-btn">Satın Al</button>
                     </form>

@@ -1,0 +1,126 @@
+﻿@model Sepet
+@{
+    ViewBag.Title = "Ödeme Sayfası";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Ödeme Bilgileri</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="/Odeme/SatinAl">
+                        <!-- Teslimat Adresi -->
+                        <div class="mb-4">
+                            <h5>Teslimat Adresi</h5>
+                            <div class="form-group mb-3">
+                                <label>Ad Soyad</label>
+                                <input type="text" class="form-control" name="AdSoyad" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Telefon</label>
+                                <input type="tel" class="form-control" name="Telefon" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Adres</label>
+                                <textarea class="form-control" name="Adres" rows="3" required></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label>İl</label>
+                                        <input type="text" class="form-control" name="Il" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label>İlçe</label>
+                                        <input type="text" class="form-control" name="Ilce" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kredi Kartı Bilgileri -->
+                        <div class="mb-4">
+                            <h5>Ödeme Bilgileri</h5>
+                            <div class="form-group mb-3">
+                                <label>Kart Üzerindeki İsim</label>
+                                <input type="text" class="form-control" name="KartIsim" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Kart Numarası</label>
+                                <input type="text" class="form-control" name="KartNumara" 
+                                       pattern="\d{4}\s?\d{4}\s?\d{4}\s?\d{4}" 
+                                       placeholder="1234 5678 9012 3456" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label>Son Kullanma Tarihi</label>
+                                        <input type="text" class="form-control" name="SonKullanma" 
+                                               placeholder="AA/YY" pattern="\d{2}/\d{2}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label>CVV</label>
+                                        <input type="text" class="form-control" name="Cvv" 
+                                               pattern="\d{3}" maxlength="3" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Ödemeyi Tamamla</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sepet Özeti -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Sipariş Özeti</h4>
+                </div>
+                <div class="card-body">
+                    @foreach (var urun in Model.Urunler)
+                    {
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>@urun.UrunAdi x @urun.Adet</span>
+                                <span>@urun.Toplam.ToString("C2")</span>
+                            </div>
+                    }
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong>Toplam Tutar:</strong>
+                        <strong>@Model.TotalAmount.ToString("C2")</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+        <script>
+            // Kart numarası formatlaması
+            document.querySelector('[name="KartNumara"]').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/(\d{4})/g, '$1 ').trim();
+                e.target.value = value;
+            });
+
+            // Son kullanma tarihi formatlaması
+            document.querySelector('[name="SonKullanma"]').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.slice(0,2) + '/' + value.slice(2,4);
+                }
+                e.target.value = value;
+            });
+        </script>
+}
