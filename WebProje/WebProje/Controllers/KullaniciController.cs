@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebProje.Models;
 using Microsoft.EntityFrameworkCore;
-
+using WebProje.Models.ViewModels;
 namespace WebProje.Controllers
 {
 	public class KullaniciController : Controller
@@ -240,6 +240,32 @@ namespace WebProje.Controllers
 				TempData["Hata"] = "Adres güncellenirken bir hata oluştu: " + ex.Message;
 				return RedirectToAction(nameof(Ayarlar));
 			}
+		}
+
+		public IActionResult SifreSifirla()
+		{
+			return View();
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> SifreSifirla(SifreSifirlaViewModel model)
+		{
+			if (!ModelState.IsValid) return View(model);
+
+			var kullanici = await context.Kullanici
+				.FirstOrDefaultAsync(k => k.Email == model.Email && k.TelNo == model.TelNo);
+
+			if (kullanici == null)
+			{
+				ModelState.AddModelError("", "Kullanıcı bulunamadı");
+				return View(model);
+			}
+
+			kullanici.Sifre = model.YeniSifre;
+			kullanici.SifreTekrar = model.YeniSifre;
+			await context.SaveChangesAsync();
+
+			return RedirectToAction("KullaniciGiris");
 		}
 	}
 

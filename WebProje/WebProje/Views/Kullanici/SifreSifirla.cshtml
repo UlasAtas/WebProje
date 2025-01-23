@@ -1,5 +1,75 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model WebProje.Models.ViewModels.SifreSifirlaViewModel
 @{
+    ViewData["Title"] = "Şifre Sıfırlama";
+    Layout = "_Layout";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/girissayfa.css" />
+}
+<div class="login-container">
+    <div class="login-box">
+        <h2 class="text-center">Şifre Sıfırlama</h2>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="Kullanici" asp-action="SifreSifirla" method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label asp-for="Email">E-posta</label>
+                <input asp-for="Email" class="form-control" placeholder="ornek@email.com">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelNo">Telefon Numarası</label>
+                <input asp-for="TelNo" class="form-control" placeholder="05XX XXX XX XX">
+                <span asp-validation-for="TelNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YeniSifre">Yeni Şifre</label>
+                <div class="password-input">
+                    <input asp-for="YeniSifre" class="form-control" type="password" placeholder="••••••••">
+                    <span class="password-toggle" onclick="togglePassword('YeniSifre')">
+                        <i class="bi bi-eye"></i>
+                    </span>
+                </div>
+                <span asp-validation-for="YeniSifre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SifreTekrar">Şifre Tekrar</label>
+                <div class="password-input">
+                    <input asp-for="SifreTekrar" class="form-control" type="password" placeholder="••••••••">
+                    <span class="password-toggle" onclick="togglePassword('SifreTekrar')">
+                        <i class="bi bi-eye"></i>
+                    </span>
+                </div>
+                <span asp-validation-for="SifreTekrar" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Şifreyi Sıfırla</button>
+            <div class="links-container mt-4">
+                <a asp-controller="Kullanici" asp-action="KullaniciGiris" class="login-link">
+                    <i class="bi bi-arrow-left"></i> Giriş Sayfasına Dön
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = event.currentTarget.querySelector('i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        }
+
+       
+    </script>
 }
