@@ -77,20 +77,22 @@
                         <i class="bi bi-arrow-left"></i> Alışverişe Devam Et
                     </a>
                 </div>
-                <div class="col-md-6 text-end">
-                    <form asp-action="SepetiTemizle" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-warning me-2">
-                            <i class="bi bi-cart-x"></i> Sepeti Temizle
-                        </button>
-                    </form>
-                    @foreach(var item in Model.Urunler)
+                    <div class="col-md-6 text-end d-flex justify-content-end align-items-center">
+                       <form asp-action="SepetiTemizle" method="post" class="d-inline me-2">
+                           <button type="submit" class="btn btn-warning">
+                               <i class="bi bi-cart-x"></i> Sepeti Temizle
+                           </button>
+                       </form>
+                    @foreach (var item in Model.Urunler)
                     {
-                        <form asp-controller="Urun" asp-action="SatinAl" method="post">
-                            <input type ="hidden" name="id" value="@item.UrunId"/>
-                            <button type="submit">Siparişi Tamamla</button>
-                        </form>
+                       <form asp-controller="Urun" asp-action="SatinAl" method="post" class="d-inline">
+                             <input type="hidden" name="id" value="@item.UrunId"/>
+                             <button type="submit" class="btn btn-success">
+                                  <i class="bi bi-cart-check"></i> Siparişi Tamamla
+                             </button>
+                       </form>
                     }
-                </div>
+                 </div>
             </div>
         }
         else
