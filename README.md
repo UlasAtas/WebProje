@@ -9,8 +9,9 @@ Kişiselleştirilebilir ürünlerin satıldığı, Asp.Net 8.0 MVC tabanlı e-ti
 
 ## SİTENİN KULLANIMI 
 
-## SİTE TANITIM VİDEOSU
 [![Web programlama final ödevi](https://img.youtube.com/vi/4K45Yu2FrqY/0.jpg)](https://youtu.be/4K45Yu2FrqY)
+
+Ürün detaylar sayfasına aşağıda değinilmiştir.
 
 ## Ana sayfa
 Ana sayfa siteye girdiğimizde bizi karşılar. Bu sayfada üzerinde;
