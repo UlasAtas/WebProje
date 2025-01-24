@@ -35,7 +35,13 @@ Detaylar sayfası üzerinde veri tabanından alınan ürün özellikleri sergile
 ![image](https://github.com/user-attachments/assets/b61f419f-cb76-4e93-b487-ab863aaa538f)
 
 ## Sepet Sayfası
-
+Sepet sayfası üzerinde sepete eklediğimiz ürünler listeleniyor. Bu sayfa üzerinden;
+- Sepete eklediğimiz ürünlerin adedini satın almak istediğimiz miktar kadar arttırabiliyor veya azaltabiliyoruz. Bu arttırma ve azaltma işleminde toplam fiyat anlık olarak değişiyor.
+- Çöp kovası ikonuna tıklayarak ürünü sepetten kaldırabiliyoruz.
+- Sepeti Temizle butonuna tıklayarak tüm sepeti temizleyebiliyoruz.
+- Siparişi Tamamla butonuna tıklayarak satın alma ekranına yönlendiliyoruz.
+- Alışverişe Devam Et butonuna tıklayarak ürünler sayfasına geri dönüp alışverişe devam edebiliyoruz.
+- Eğer sepet boşsa alışverişe başlamak için tıklayın yazısına tıklayarak ürünler sayfasına yönlendiliyoruz.
 
 ![image](https://github.com/user-attachments/assets/11713c12-9d2f-41d2-9924-4e8ea25ec467)
 
