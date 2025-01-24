@@ -1,54 +1,59 @@
 ﻿@model WebProje.Models.Urun
 @{
-    ViewData["Title"] = "Yeni Ürün Ekle";
+    ViewData["Title"] = "Ürün Ekle";
 }
 
-<div class="container mt-4">
-    <h2>Yeni Ürün Ekle</h2>
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
 
-    <form asp-action="UrunEkle" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="admin-container">
+    <div class="admin-box">
+        <h2>Yeni Ürün Ekle</h2>
 
-        <div class="form-group mb-3">
-            <label asp-for="UrunAdi" class="control-label">Ürün Adı</label>
-            <input asp-for="UrunAdi" class="form-control" />
-            <span asp-validation-for="UrunAdi" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mb-3">
-            <label asp-for="Aciklama" class="control-label">Açıklama</label>
-            <textarea asp-for="Aciklama" class="form-control"></textarea>
-            <span asp-validation-for="Aciklama" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mb-3">
-            <label asp-for="Fiyat" class="control-label">Fiyat</label>
-            <input asp-for="Fiyat" class="form-control" type="number" step="0.01" />
-            <span asp-validation-for="Fiyat" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mb-3">
-            <label asp-for="StokMiktari" class="control-label">Stok Miktarı</label>
-            <input asp-for="StokMiktari" class="form-control" type="number" />
-            <span asp-validation-for="StokMiktari" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mb-3">
-            <label asp-for="ResimUrl" class="control-label">Resim URL</label>
-            <input asp-for="ResimUrl" class="form-control" />
-            <span asp-validation-for="ResimUrl" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mb-3">
-            <div class="form-check">
-                <input asp-for="AktifMi" class="form-check-input" type="checkbox" />
-                <label asp-for="AktifMi" class="form-check-label">Aktif Mi?</label>
+        <form asp-action="UrunEkle" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label asp-for="UrunAdi" class="form-label">Ürün Adı</label>
+                <input asp-for="UrunAdi" class="form-control" />
+                <span asp-validation-for="UrunAdi" class="text-danger"></span>
             </div>
-        </div>
 
-        <div class="form-group mb-3">
-            <button type="submit" class="btn btn-primary">Kaydet</button>
-            <a asp-action="UrunYonetimi" class="btn btn-secondary">İptal</a>
-        </div>
-    </form>
+            <div class="mb-3">
+                <label asp-for="Aciklama" class="form-label">Açıklama</label>
+                <textarea asp-for="Aciklama" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Aciklama" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Fiyat" class="form-label">Fiyat</label>
+                <input asp-for="Fiyat" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Fiyat" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="StokMiktari" class="form-label">Stok Miktarı</label>
+                <input asp-for="StokMiktari" class="form-control" type="number" />
+                <span asp-validation-for="StokMiktari" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="ResimDosyasi" class="form-label">Ürün Resmi</label>
+                <input type="file" name="ResimDosyasi" class="form-control" accept="image/*" />
+            </div>
+
+            <div class="mb-3 form-check">
+                <input asp-for="AktifMi" class="form-check-input" type="checkbox" checked />
+                <label asp-for="AktifMi" class="form-check-label">Aktif</label>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Ürün Ekle</button>
+                <a asp-action="UrunYonetimi" class="btn btn-outline-secondary">İptal</a>
+            </div>
+        </form>
+    </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
