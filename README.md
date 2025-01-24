@@ -4,21 +4,39 @@ Kişiselleştirilebilir ürünlerin satıldığı, Asp.Net 8.0 MVC tabanlı e-ti
 
 ## Sitenin Kullanımı 
 
-### Ana sayfa
-![image](https://github.com/user-attachments/assets/aca3474e-435d-4a33-9122-741ef2dbb204)
-![image](https://github.com/user-attachments/assets/3dbc4b5b-c3d9-4e94-ab0f-3cf4bbf11a96)
+## Ana sayfa
+Siteye girdiğimizde bizi ana sayfa karşılıyor. Bu sayfada;
+- Ürünlerimizin tanıtımları yapılıyor.
 
+![image](https://github.com/user-attachments/assets/aca3474e-435d-4a33-9122-741ef2dbb204)
 
 ## Hakkımızda Sayfası
+Hakkımızda sayfasında işletmemizin hikayesi bulunuyor. Ayrıca iletişim bilgileri ve işletmemizin konumunu gösteren harita da sayfanın alt kısmında yer alıyor.
+
 ![image](https://github.com/user-attachments/assets/d7662ec5-e250-4026-b0d2-8640ef017eae)
 
 ## Ürünler Sayfası
+Veri tabanına kaydedilen ürünlerimiz bu sayfa üstünde listeleniyor. Bu sayfa üzerinden;
+- Detaylar butonuna tıklayarak ürünlerin detaylarının bulunduğu sayfaya erişilebiliyor.
+- Sepete ekle butonuna tıklayarak ürünler sepete eklenebiliyor.
+- Satın al butonuna tıklayarak direkt satın alma sayfasına yönlendiriliyoruz.
+
+(Satın al ve sepete ekle butonu üye girişi yapılmışsa işlevsel hale geliyor eğer üye girişi yapılmamışsa giriş yap sayfasına yönlendiliriliyoruz.)
+
 ![image](https://github.com/user-attachments/assets/50e93f6c-b6d5-459d-a520-cf2e43499d72)
 
 ## Ürün Detay Sayfası
+Detaylar sayfası üzerinde veri tabanından alınan ürün özellikleri sergilenir. Bu sayfa üzerinden;
+- Satın al butonuna tıklayarak direkt satın alma sayfasına yönlendiriliyoruz.
+- Sepete ekle butonuna tıklayarak ürünler sepete eklenebiliyor.
+
+(Satın al ve sepete ekle butonu üye girişi yapılmışsa işlevsel hale geliyor eğer üye girişi yapılmamışsa giriş yap sayfasına yönlendiliriliyoruz.)
+
 ![image](https://github.com/user-attachments/assets/b61f419f-cb76-4e93-b487-ab863aaa538f)
 
 ## Sepet Sayfası
+
+
 ![image](https://github.com/user-attachments/assets/11713c12-9d2f-41d2-9924-4e8ea25ec467)
 
 ## Satın Al Sayfası
