@@ -8,7 +8,7 @@
 Kişiselleştirilebilir ürünlerin satıldığı, Asp.Net 8.0 MVC tabanlı e-ticaret sitesi projesi.
 
 ## SİTENİN KULLANIMI 
-
+### Tanıtım Videosu
 [![Web programlama final ödevi](https://img.youtube.com/vi/4K45Yu2FrqY/0.jpg)](https://youtu.be/4K45Yu2FrqY)
 
 Ürün detaylar sayfasına aşağıda değinilmiştir.
